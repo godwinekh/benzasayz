@@ -1,0 +1,25 @@
+.ov-bg-image-full {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50vh;
+  padding: 0;
+}
+
+.ov-bg-image-half {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 25vh;
+  padding: 0;
+}
+
+.ov-bg-overlay {
+  background-color: rgba(0,0,0,0.75);
+  height: 100vh;
+  color: azure;
+}
+
+.no-padding {
+  padding: 2px;
+}
