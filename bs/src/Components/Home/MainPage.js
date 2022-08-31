@@ -3,16 +3,18 @@ import styles from "./MainPage.module.css";
 import MoviePreview from "../Movies/MoviePreview";
 import SearchForm from "./SearchForm";
 import Header from "../Sections/Header";
+import NewReviews from "./NewReviews";
 
 const MainPage = () => {
   return (
     <React.Fragment>
       <Header />
-      <section className="">
+      <section className="mt-16">
         <div className="flex flex-col lg:flex-row text-white">
           <MoviePreview
             className={`sm:basis-full lg:basis-3/5 ${styles["ov-bg-image-full"]}`}
-            title="Today's Pick: Scream"
+            title="Today's Pick: Deadpool"
+            rating="7.5"
             snapshot="Some little synopsis about this movie that would encourage you to want to watch it."
             style={{ backgroundImage: "url(/Images/6366.jpg)" }}
           />
@@ -38,6 +40,7 @@ const MainPage = () => {
           </div>
         </div>
       </section>
+      <NewReviews  className={`text-gray-100 ${styles["ov-bg-image-full"]}`} />
     </React.Fragment>
   );
 };
