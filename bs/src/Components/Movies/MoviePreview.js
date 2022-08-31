@@ -13,7 +13,7 @@ const MoviePreview = (props) => {
 
   return (
     <div className={`${props.className} relative`} style={props.style}>
-      <div className={`container p-5 bg-gradient-to-b from-transparent to-slate-900 absolute bottom-0`}>
+      <div className={`container p-5 bg-gradient-to-b from-transparent to-slate-900 absolute -bottom-1`}>
         <h1 className="font-bold text-2xl">{props.title}</h1>
         <p className="py-5">{props.snapshot}</p>
         <div id="links" className="flex flex-row gap-2 items-center">

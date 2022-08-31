@@ -1,4 +1,4 @@
-.ov-bg-image-full {
+.bg-image-full {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -6,7 +6,7 @@
   padding: 0;
 }
 
-.ov-bg-image-half {
+.bg-image-half {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -14,7 +14,14 @@
   padding: 0;
 }
 
-.ov-bg-overlay {
+.bg-image-footer {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: auto;
+}
+
+.bg-overlay {
   background-color: rgba(0,0,0,0.75);
   height: 100vh;
   color: azure;

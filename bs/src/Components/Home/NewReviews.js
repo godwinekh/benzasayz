@@ -1,12 +1,10 @@
 import MoviePreview from "../Movies/MoviePreview";
+import SectionHeader from "../Sections/SectionHeader";
 
 const NewReviews = (props) => {
   return (
     <section className="pt-8 bg-gray-700 -mt-1">
-      <div className="px-5 mb-8 border-l-8 border-gray-900">
-        <h2 className="text-3xl font-bold text-stone-300">New Reviews</h2>
-      </div>
-
+      <SectionHeader className="mb-8">New Reviews</SectionHeader>
       <MoviePreview
         className={props.className}
         title="Morbius"
@@ -28,6 +26,10 @@ const NewReviews = (props) => {
         snapshot="The movie was just there. Nothing really special or so fun about it."
         style={{ backgroundImage: "url(/Images/uncharted.png)" }}
       />
+
+      <div className="bg-slate-900 pt-10 p-5 text-center">
+        <a href="/" alt={'browse all reviews'} className="px-3 py-2 bg-stone-400 text-gray-900 rounded-lg" >More Reviews</a>
+      </div>
     </section>
   );
 };
