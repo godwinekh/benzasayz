@@ -1,7 +1,7 @@
 import MovieThumbnail from "../Movies/MovieThumbnail";
 import SectionHeader from "../Sections/SectionHeader";
 
-const Recommended = () => {
+const Watchlist = () => {
   return (
     <section className="bg-gradient-to-t from-gray-700 to-slate-900 py-12 -mt-1">
       <SectionHeader className="mb-10">Benza's Watchlist</SectionHeader>
@@ -17,4 +17,4 @@ const Recommended = () => {
   );
 };
 
-export default Recommended;
+export default Watchlist;

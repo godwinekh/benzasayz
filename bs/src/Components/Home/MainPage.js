@@ -4,7 +4,7 @@ import MoviePreview from "../Movies/MoviePreview";
 import SearchForm from "./SearchForm";
 import Header from "../Sections/Header";
 import NewReviews from "./NewReviews";
-import Recommended from "./Recommended";
+import Watchlist from "./Watchlist";
 import Footer from "../Sections/Footer";
 
 const MainPage = () => {
@@ -43,7 +43,7 @@ const MainPage = () => {
         </div>
       </section>
       <NewReviews  className={`text-gray-100 ${styles["bg-image-full"]}`} />
-      <Recommended />
+      <Watchlist />
       <Footer className={styles['bg-image-footer']} style={{backgroundImage: "url(/Images/footer-bg.jpg)"}} />
     </React.Fragment>
   );
