@@ -28,7 +28,7 @@ const NewReviews = (props) => {
       />
 
       <div className="bg-slate-900 pt-10 p-5 text-center">
-        <a href="/" alt={'browse all reviews'} className="px-3 py-2 bg-stone-400 text-gray-900 rounded-lg" >More Reviews</a>
+        <a href="/" alt={'browse all reviews'} className="px-3 py-2 text-yellow-500 rounded-lg" >More Reviews <i className="bi-arrow-right"></i></a>
       </div>
     </section>
   );

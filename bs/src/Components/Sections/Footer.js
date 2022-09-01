@@ -5,10 +5,10 @@ const Footer = (props) => {
       <div className="bg-slate-800 bg-opacity-90 pt-20 -mt-2 text-stone-400 ">
         <div className="px-5 text-center text-white">
           <h2 className="text-xl">Community</h2>
-          <p className="text-xs mt-2">Connect to enjoy more and receive notifications on updates</p>
-          <div className="flex flex-row gap-3 pt-6 pb-8 justify-center">
-            <a href="/" alt={'Instagram'}>Instagram</a>
-            <a href="/" alt={'Instagram'}>WhatsApp</a>
+          <p className="text-xs mt-2 text-yellow-500">Connect to enjoy more and receive notifications on updates</p>
+          <div className="flex flex-row gap-10 pt-6 pb-8 justify-center">
+            <a href="/" alt={'Whatsapp'}><i className="bi-whatsapp text-2xl"></i></a>
+            <a href="/" alt={'Instagram'}><i className="bi-instagram text-2xl"></i></a>
           </div>
         </div>
 
