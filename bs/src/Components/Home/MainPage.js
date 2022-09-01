@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./MainPage.module.css";
 import MoviePreview from "../Movies/MoviePreview";
 import SearchForm from "./SearchForm";
@@ -6,8 +6,20 @@ import Header from "../Sections/Header";
 import NewReviews from "./NewReviews";
 import Watchlist from "./Watchlist";
 import Footer from "../Sections/Footer";
+import MovieReview from "../Movies/MovieReview";
 
 const MainPage = () => {
+  const [movieReviewModal, setMovieReviewModal] = useState(false);
+
+  const showMovieReviewHandler = (event) => {
+    event.preventDefault();
+    setMovieReviewModal(true);
+  };
+
+  const dismissMovieReviewHandler = () => {
+    setMovieReviewModal(false);
+  };
+
   return (
     <React.Fragment>
       <Header />
@@ -19,6 +31,7 @@ const MainPage = () => {
             rating="7.5"
             snapshot="Some little synopsis about this movie that would encourage you to want to watch it."
             style={{ backgroundImage: "url(/Images/6366.jpg)" }}
+            onClick={showMovieReviewHandler}
           />
 
           {/* Hidden for and Large Devices */}
@@ -45,6 +58,8 @@ const MainPage = () => {
       <NewReviews  className={`text-gray-100 ${styles["bg-image-full"]}`} />
       <Watchlist />
       <Footer className={styles['bg-image-footer']} style={{backgroundImage: "url(/Images/footer-bg.jpg)"}} />
+
+      {movieReviewModal && <MovieReview onDismiss={dismissMovieReviewHandler}/>}
     </React.Fragment>
   );
 };
