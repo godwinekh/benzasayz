@@ -1,11 +1,12 @@
+import styles from "./Footer.module.css"
 
-const Footer = (props) => {
+const Footer = () => {
   return (
-    <section className={`${props.className}`} style={props.style}>
+    <section className={styles['bg-image-footer']} style={{backgroundImage: "url(/Images/footer-bg.jpg)"}}>
       <div className="bg-slate-800 bg-opacity-90 pt-20 -mt-2 text-stone-400 ">
         <div className="px-5 text-center text-white">
           <h2 className="text-xl">Community</h2>
-          <p className="text-xs mt-2 text-yellow-500">Connect to enjoy more and receive notifications on updates</p>
+          <p className="text-xs mt-2 text-stone-400">Catch up on the latest movie news, trailers and reviews and download links all in the right places. Connect to enjoy more and receive notifications on updates</p>
           <div className="flex flex-row gap-10 pt-6 pb-8 justify-center">
             <a href="/" alt={'Whatsapp'}><i className="bi-whatsapp text-2xl"></i></a>
             <a href="/" alt={'Instagram'}><i className="bi-instagram text-2xl"></i></a>

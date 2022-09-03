@@ -1,10 +1,11 @@
 import MoviePreview from "../Movies/MoviePreview";
 import SectionHeader from "../Sections/SectionHeader";
+import Button from "../UI/Button";
 
 const NewReviews = (props) => {
   return (
     <section className="pt-8 bg-gray-700 -mt-1">
-      <SectionHeader className="mb-8">New Reviews</SectionHeader>
+      <SectionHeader className="mb-8 text-3xl">New Reviews</SectionHeader>
       <MoviePreview
         className={props.className}
         title="Morbius"
@@ -28,7 +29,7 @@ const NewReviews = (props) => {
       />
 
       <div className="bg-slate-900 pt-10 p-5 text-center">
-        <a href="/" alt={'browse all reviews'} className="px-3 py-2 text-yellow-500 rounded-lg" >More Reviews <i className="bi-arrow-right"></i></a>
+        <Button onClick={props.reviewsLink} className="px-3 py-2 text-yellow-500 rounded-lg" >More Reviews <i className="bi-arrow-right"></i></Button>
       </div>
     </section>
   );

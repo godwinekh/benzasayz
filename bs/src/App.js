@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import MainPage from './Components/Home/MainPage';
+import Home from './Components/Home/Home';
+import Reviews from './Components/Reviews/Reviews';
 
 
 function App() {
+  const [switchPages, setSwitchPages] = useState(true);
+
+  const reviewsPageHandler = () => {
+    setSwitchPages(false);
+  };
+  
+  const homePageHandler = () => {
+    setSwitchPages(true);
+  };
+
   return (
-    <main className=''>
-      <MainPage />
-    </main>
+    <React.Fragment>
+      { switchPages && <Home homeLink={homePageHandler} reviewsLink={reviewsPageHandler} /> }
+      { !switchPages && <Reviews homeLink={homePageHandler} /> }
+    </React.Fragment>
   );
 }
 

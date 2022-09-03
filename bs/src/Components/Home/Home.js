@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import styles from "./MainPage.module.css";
 import MoviePreview from "../Movies/MoviePreview";
-import SearchForm from "./SearchForm";
+import SearchForm from "../Sections/SearchForm";
 import Header from "../Sections/Header";
 import NewReviews from "./NewReviews";
 import Watchlist from "./Watchlist";
 import Footer from "../Sections/Footer";
 import MovieReview from "../Movies/MovieReview";
+import styles from "./Home.module.css";
 
-const MainPage = () => {
+const Home = (props) => {
   const [movieReviewModal, setMovieReviewModal] = useState(false);
 
   const showMovieReviewHandler = (event) => {
@@ -21,8 +21,8 @@ const MainPage = () => {
   };
 
   return (
-    <React.Fragment>
-      <Header />
+    <main>
+      <Header homeLink={props.homeLink} />
       <section className="mt-16">
         <div className="flex flex-col lg:flex-row text-white">
           <MoviePreview
@@ -55,13 +55,13 @@ const MainPage = () => {
           </div>
         </div>
       </section>
-      <NewReviews  className={`text-gray-100 ${styles["bg-image-full"]}`} />
+      <NewReviews className={`text-gray-100 ${styles["bg-image-full"]}`} reviewsLink={props.reviewsLink} />
       <Watchlist />
-      <Footer className={styles['bg-image-footer']} style={{backgroundImage: "url(/Images/footer-bg.jpg)"}} />
+      <Footer />
 
       {movieReviewModal && <MovieReview onDismiss={dismissMovieReviewHandler}/>}
-    </React.Fragment>
+    </main>
   );
 };
 
-export default MainPage;
+export default Home;

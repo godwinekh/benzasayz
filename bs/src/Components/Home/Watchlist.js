@@ -4,7 +4,7 @@ import SectionHeader from "../Sections/SectionHeader";
 const Watchlist = () => {
   return (
     <section className="bg-gradient-to-t from-gray-700 to-slate-900 py-12 -mt-1">
-      <SectionHeader className="mb-10">Benza's Watchlist</SectionHeader>
+      <SectionHeader className="mb-10 text-3xl">Benza's Watchlist</SectionHeader>
 
       <div className="mt-8 px-5">
         <MovieThumbnail />
