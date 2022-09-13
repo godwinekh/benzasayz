@@ -1,4 +1,4 @@
-import SectionHeader from "../Sections/SectionHeader";
+import SectionHeader from "../Layout/SectionHeader";
 import Button from "../UI/Button";
 
 const FilterForm = () => {

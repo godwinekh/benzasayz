@@ -9,7 +9,7 @@ const ReviewList = () => {
     <React.Fragment>
       <SubPanel />
 
-      <section className="mt-48 bg-slate-900 py-12 px-5">
+      <section className="mt-48 bg-slate-900 py-12 px-5 lg:mt-28">
         <MovieThumbnail />
         <MovieThumbnail />
         <MovieThumbnail />

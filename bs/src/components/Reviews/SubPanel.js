@@ -16,7 +16,7 @@ const SubPanel = () => {
 
   return (
     <React.Fragment>
-      <div className="fixed top-40 left-0 right-0 flex flex-row pl-5 pb items-center bg-slate-900 text-white">
+      <div className="fixed top-40 lg:top-16 lg:pt-4 lg:pb-2 left-0 right-0 flex flex-row pl-5 items-center bg-slate-900 text-white">
         <p className="flex-grow text-sm">Showing 0 of 0 entries</p>
         <Button type="button" className="py-1 px-5 align-middle" onClick={displayFilterHandler}><i className="bi-filter-right text-xl"></i> Filter</Button>
       </div>
