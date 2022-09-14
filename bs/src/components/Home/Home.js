@@ -28,7 +28,7 @@ const Home = (props) => {
             className={`w-full ${styles["bg-image-full"]}`}
             title="Today's Pick: Deadpool"
             rating="7.5"
-            snapshot="Some little synopsis about this movie that would encourage you to want to watch it."
+            description="Some little synopsis about this movie that would encourage you to want to watch it."
             style={{ backgroundImage: "url(/Images/6366.jpg)" }}
             onClick={showMovieReviewHandler}
           />

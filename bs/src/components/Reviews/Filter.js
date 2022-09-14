@@ -1,3 +1,4 @@
+import React from "react";
 import Modal from "../UI/Modal";
 import FilterForm from "./FilterForm";
 

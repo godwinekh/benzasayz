@@ -1,3 +1,4 @@
+import React from "react";
 import MovieThumbnail from "../Movies/MovieThumbnail";
 import SectionHeader from "../Layout/SectionHeader";
 

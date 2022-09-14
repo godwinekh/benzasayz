@@ -1,5 +1,6 @@
-import Button from "../UI/Button";
+import React from "react";
 import Modal from "../UI/Modal";
+
 
 const MovieReview = (props) => {
   return (

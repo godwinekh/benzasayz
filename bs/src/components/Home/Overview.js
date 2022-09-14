@@ -11,7 +11,7 @@ const Overview = (props) => {
           className={`basis-1/4 shadow-xl shadow-slate-900 hover:scale-105 ${props.styleImg}`}
           title="Deadpool"
           rating="4.0"
-          snapshot="The movie was just there. Nothing really special or so fun about it."
+          synopsis="The movie was just there. Nothing really special or so fun about it."
           style={{ backgroundImage: "url(/Images/6366.jpg)", height: "28em" }}
         />
         
@@ -19,7 +19,7 @@ const Overview = (props) => {
           className={`basis-2/4 shadow-xl shadow-slate-900 hover:scale-105 z-10 ${props.styleImg}`}
           title="Deadpool"
           rating="4.0"
-          snapshot="The movie was just there. Nothing really special or so fun about it."
+          synopsis="The movie was just there. Nothing really special or so fun about it."
           style={{ backgroundImage: "url(/Images/6366.jpg)", height: "32em" }}
           onClick={props.onClick}
         />
@@ -28,7 +28,7 @@ const Overview = (props) => {
           className={`basis-1/4 shadow-xl shadow-slate-900 hover:scale-105 ${props.styleImg}`}
           title="Deadpool"
           rating="4.0"
-          snapshot="The movie was just there. Nothing really special or so fun about it."
+          synopsis="The movie was just there. Nothing really special or so fun about it."
           style={{ backgroundImage: "url(/Images/6366.jpg)", height: "28em" }}
         />
       </div>
