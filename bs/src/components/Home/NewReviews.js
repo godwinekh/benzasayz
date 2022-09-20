@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import MoviePreview from "../Movies/MoviePreview";
 import SectionHeader from "../Layout/SectionHeader";
-import Button from "../UI/Button";
 import MovieContext from "../../store/movie-context";
+import { Link } from "react-router-dom";
 
 const NewReviews = (props) => {
   const movieCtx = useContext(MovieContext);
@@ -10,8 +10,9 @@ const NewReviews = (props) => {
 
   const contents = movies.map((movie) => (
     <MoviePreview
-      className={props.className}
+      className="text-gray-100 bg-image-full"
       key={movie.id}
+      id={movie.id}
       title={movie.title}
       rating={movie.rating}
       synopsis={movie.synopsis}
@@ -27,12 +28,9 @@ const NewReviews = (props) => {
       </div>
 
       <div className="bg-slate-900 pt-10 p-5 text-center">
-        <Button
-          onClick={props.reviewsLink}
-          className="px-3 py-2 text-yellow-500 rounded-lg"
-        >
+        <Link to="/reviews" className="px-3 py-2 text-yellow-500 rounded-lg">
           More Reviews <i className="bi-arrow-right"></i>
-        </Button>
+        </Link>
       </div>
     </section>
   );

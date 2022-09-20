@@ -1,12 +1,25 @@
-a:hover, a:active {
-  color: #eab308
+.bg-image-full {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50vh;
+  padding: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bg-image-half {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 25vh;
+  padding: 0;
+}
+
+.bg-overlay {
+  background-color: rgba(0,0,0,0.75);
+  height: 100vh;
+  color: azure;
+}
+
+.no-padding {
+  padding: 2px;
 }

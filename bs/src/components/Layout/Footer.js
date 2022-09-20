@@ -9,8 +9,8 @@ const Footer = () => {
           <h2 className="text-xl">Community</h2>
           <p className="text-xs mt-2 text-stone-400">Catch up on the latest movie news, trailers and reviews and download links all in the right places. Connect to enjoy more and receive notifications on updates</p>
           <div className="flex flex-row gap-10 pt-6 pb-8 justify-center my-10">
-            <a href="/" alt={'Whatsapp'}><i className="bi-whatsapp text-2xl"></i></a>
-            <a href="/" alt={'Instagram'}><i className="bi-instagram text-2xl"></i></a>
+            <a href="/" target="_blank" alt={'Whatsapp'}><i className="bi-whatsapp text-2xl"></i></a>
+            <a href="/" target="_blank" alt={'Instagram'}><i className="bi-instagram text-2xl"></i></a>
           </div>
         </div>
 

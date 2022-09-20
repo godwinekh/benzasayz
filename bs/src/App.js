@@ -1,33 +1,25 @@
-import React, { useState } from 'react';
-import './App.css';
-import Home from './components/Home/Home';
-import Header from './components/Layout/Header';
-import Footer from './components/Layout/Footer';
-import Reviews from './components/Reviews/Reviews';
-import MovieProvider from './store/MovieProvider';
+import React from "react";
+import Home from "./pages/Home";
+import Reviews from "./pages/Reviews";
+import MovieProvider from "./store/MovieProvider";
+import Layout from "./components/Layout/Layout";
+import { Navigate, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Queried from "./pages/Queried";
 
-
-function App() {
-  const [switchPages, setSwitchPages] = useState(true);
-
-  const reviewsPageHandler = () => {
-    setSwitchPages(false);
-  };
-  
-  const homePageHandler = () => {
-    setSwitchPages(true);
-  };
-
+const App = () => {
   return (
     <MovieProvider>
-      <Header homeLink={homePageHandler}/>
-      <main className='bg-gradient-to-b from-gray-800 to-slate-900'>
-        { switchPages && <Home reviewsLink={reviewsPageHandler} /> }
-        { !switchPages && <Reviews /> }
-      </main>
-      <Footer />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/reviews" element={<Reviews />} /> 
+          <Route path="/reviews/search/:movieTitle" element={<Queried />} />
+        </Routes>
+      </Layout>
     </MovieProvider>
   );
-}
+};
 
 export default App;

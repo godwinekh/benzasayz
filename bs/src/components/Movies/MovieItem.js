@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import MovieReview from "./MovieReview";
 
-const MovieThumbnail = (props) => {
+const MovieItem = (props) => {
   const [movieModal, setMovieModal] = useState(false);
 
   const showReviewHandler = (event) => {
@@ -14,13 +14,13 @@ const MovieThumbnail = (props) => {
 
   return (
     <Fragment>
-      <div className="border border-gray-600 rounded-r-xl shadow-xl bg-gray-700 text-stone-300 mb-3">
-        <img className="inline w-16 h-20" src={props.image} alt={props.title} style={{size: "contain"}} />
+      <div className="border border-gray-600 shadow-xl bg-gray-700 text-stone-300">
+        <img className="inline h-24" src={props.image} alt={props.title} />
         <div className="inline-block align-middle px-5">
           <p className="capitalize text-lg hover:text-yellow-500 hover:cursor-pointer" onClick={showReviewHandler}>
             {props.title}
           </p>
-          <p className="text-xs">{props.releaseDate}</p>
+          <p className="text-sm">{props.synopsis}</p>
         </div>
       </div>
 
@@ -29,4 +29,4 @@ const MovieThumbnail = (props) => {
   );
 };
 
-export default MovieThumbnail;
+export default MovieItem;

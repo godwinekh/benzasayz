@@ -10,7 +10,7 @@ const movieContext = {
       synopsis:
         "The movie was just there. Nothing really special or so fun about it.",
       releaseDate: "2022-05-23",
-      rating: 4.0,
+      rating: 5.3,
       cast: [
         "Tom Holland",
         "Mark Wahlberg",
@@ -21,7 +21,7 @@ const movieContext = {
       genre: ["action", "adventure", "comedy"],
       trailer: "some link",
       download: "some link",
-      fullReview: "major text",
+      fullReview: "No review posted yet. Sorry!",
     },
     {
       id: "m2",
@@ -30,7 +30,7 @@ const movieContext = {
       synopsis:
         "The movie was just there. Nothing really special or so fun about it.",
       releaseDate: "2022-05-23",
-      rating: 7.0,
+      rating: 3.5,
       cast: [
         "Tom Holland",
         "Mark Wahlberg",
@@ -41,7 +41,7 @@ const movieContext = {
       genre: ["action", "adventure", "comedy"],
       trailer: "some link",
       download: "some link",
-      fullReview: "major text",
+      fullReview: "No review posted yet. Sorry!",
     },
     {
       id: "m3",
@@ -50,7 +50,7 @@ const movieContext = {
       synopsis:
         "The movie was just there. Nothing really special or so fun about it.",
       releaseDate: "2022-05-23",
-      rating: 4.0,
+      rating: 3.5,
       cast: [
         "Tom Holland",
         "Mark Wahlberg",
@@ -61,7 +61,7 @@ const movieContext = {
       genre: ["action", "adventure", "comedy"],
       trailer: "some link",
       download: "some link",
-      fullReview: "major text",
+      fullReview: "No review posted yet. Sorry!",
     },
     {
       id: "m4",
@@ -70,7 +70,7 @@ const movieContext = {
       synopsis:
         "The movie was just there. Nothing really special or so fun about it.",
       releaseDate: "2022-05-23",
-      rating: 4.0,
+      rating: 7.5,
       cast: [
         "Tom Holland",
         "Mark Wahlberg",
@@ -81,7 +81,27 @@ const movieContext = {
       genre: ["action", "adventure", "comedy"],
       trailer: "some link",
       download: "some link",
-      fullReview: "major text",
+      fullReview: "No review posted yet. Sorry!",
+    },
+    {
+      id: "m5",
+      imagePath: "/Images/thor.webp",
+      title: "Thor",
+      synopsis:
+        "The movie was just there. Nothing really special or so fun about it.",
+      releaseDate: "2022-05-23",
+      rating: 6.2,
+      cast: [
+        "Tom Holland",
+        "Mark Wahlberg",
+        "Sophia Ali",
+        "Tati Gabrielle",
+        "Antonio Banderas",
+      ],
+      genre: ["action", "adventure", "comedy"],
+      trailer: "some link",
+      download: "some link",
+      fullReview: "No review posted yet. Sorry!",
     },
   ],
 };

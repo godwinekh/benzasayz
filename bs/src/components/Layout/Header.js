@@ -1,17 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SearchForm from "./SearchForm";
 
-const Header = (props) => {
+const Header = () => {
   return (
     <header className="bg-stone-400 bg-opacity-95 text-white shadow-md fixed top-0 right-0 left-0 z-20">
       <nav className="flex justify-between items-center">
         <div className="pl-5 py-4 lg:px-16">
-          <h2
-            className="text-2xl font-extrabold text-gray-900 cursor-pointer"
-            onClick={props.homeLink}
-          >
+          <Link to="/home" className="text-2xl font-extrabold text-gray-900 cursor-pointer">
             Benza<span className="font-thin text-slate-900">says</span>
-          </h2>
+          </Link>
         </div>
 
         {/* For large devices only, search bar */}
@@ -27,11 +25,17 @@ const Header = (props) => {
               <SearchForm />
             </li>
 
-            <li className="px-5"><a href=".">Browse all archives</a></li>
-            <li className=""><a href=".">Blog</a></li>
+            <li className="px-5">
+              <Link to="/reviews/all-reviews">Browse all reviews</Link>
+            </li>
+            <li className="">
+              <Link to="">Blog</Link>
+            </li>
             <li className="px-5 text-3xl">
               <div>
-                <a href="/" alt={'Instagram'}><i className="bi-instagram"></i></a>
+                <a href="https://www.instagram.com/benzasayz/" target="_blank" rel="noreferrer" alt={"Instagram"}>
+                  <i className="bi-instagram"></i>
+                </a>
               </div>
             </li>
           </ul>
