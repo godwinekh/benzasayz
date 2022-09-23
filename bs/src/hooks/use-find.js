@@ -27,7 +27,7 @@ const useFind = () => {
       return movieMatch;
     } else {
       setMatchIsFound(false);
-      const movieMatch = `Sorry, we found no reviews for ${title}. You can browse through our archives for other delights!`;
+      const movieMatch = <div><p className="mb-4">Sorry, we found no reviews for {title}.</p> <p>You can browse through our archives for other interesting reviews or try a different search.</p></div>;
       return movieMatch;
     }
   }, [movies]);

@@ -40,7 +40,7 @@ const MoviePreview = (props) => {
           <p className="py-5">{props.synopsis}</p>
           <div
             id="links"
-            className="flex flex-row gap-4 items-center text-stone-400"
+            className="flex flex-row gap-3 items-center text-stone-400"
           >
             <p className={`${ratingColor} px-2 py-1 font-bold text-lg`}>
               {props.rating}
@@ -52,10 +52,10 @@ const MoviePreview = (props) => {
               <i className="bi-download text-xl"></i>
             </a>
             <p
-              className="uppercase text-sm hover:text-yellow-500 hover:cursor-pointer"
+              className="capitalize text-md hover:text-yellow-500 hover:cursor-pointer"
               onClick={showReviewHandler}
             >
-              read full review
+              bs review
             </p>
           </div>
         </div>

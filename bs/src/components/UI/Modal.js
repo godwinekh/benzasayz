@@ -12,7 +12,7 @@ const ModalOverlay = (props) => {
   return (
     <div className="fixed top-0 right-0 w-full md:w-1/2 lg:w-1/4 h-full z-40 overflow-scroll overscroll-none transition ease-in-out duration-1000">
         <div className="sticky top-0 border-b border-stone-400 text-stone-700 bg-stone-300">
-          <Button type="button" className="p-3 hover:bg-slate-700 hover:text-white" onClick={props.onDismiss}><i className="bi-caret-left"></i> Back</Button>
+          <Button type="button" className="p-3 hover:bg-slate-700 hover:text-white" onClick={props.onClose}><i className="bi-caret-left"></i> Close</Button>
         </div>
         {props.children}
        </div>
@@ -25,7 +25,7 @@ const Modal = (props) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(<Backdrop onDismiss={props.onDismiss} />, portalElement)}
-      {ReactDOM.createPortal(<ModalOverlay onDismiss={props.onDismiss}>{props.children}</ModalOverlay>, portalElement)}       
+      {ReactDOM.createPortal(<ModalOverlay onClose={props.onDismiss}>{props.children}</ModalOverlay>, portalElement)}       
     </Fragment>
   );
 };

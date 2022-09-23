@@ -21,6 +21,11 @@ const Queried = (props) => {
     setSearchResults({ exactMovie: exact, relatedMovies: related });
   }, [movieTitle, exactMatch, relatedMatches]);
 
+  useEffect(() => {
+    // scroll to top on page load
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, []);
+
 
   return (
     <Fragment>

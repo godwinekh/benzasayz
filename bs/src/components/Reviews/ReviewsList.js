@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import MovieContext from "../../store/movie-context";
-import MovieThumbnail from "../Movies/MovieThumbnail";
+import MoviePreview from "../Movies/MoviePreview";
 import Button from "../UI/Button";
 import SubPanel from "./SubPanel";
 
@@ -9,12 +9,14 @@ const ReviewsList = () => {
   const { movies } = movieCtx;
 
   const previews = movies.map((movie) => (
-    <MovieThumbnail
+    <MoviePreview
+      className="text-gray-100 bg-image-full"
       key={movie.id}
       id={movie.id}
       title={movie.title}
-      image={movie.imagePath}
-      releaseDate={movie.releaseDate}
+      rating={movie.rating}
+      synopsis={movie.synopsis}
+      style={{ backgroundImage: `url(${movie.imagePath})` }}
     />
   ));
 
@@ -23,7 +25,7 @@ const ReviewsList = () => {
       <SubPanel />
 
       <section className="mt-48 bg-slate-900 py-12 px-5 lg:mt-28">
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-6">
           {previews}
         </div>
 

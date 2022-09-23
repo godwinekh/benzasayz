@@ -6,6 +6,7 @@ import Layout from "./components/Layout/Layout";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Queried from "./pages/Queried";
+import Uploads from "./pages/Uploads";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/reviews" element={<Reviews />} /> 
           <Route path="/reviews/search/:movieTitle" element={<Queried />} />
+          <Route path="/uploads" element={<Uploads />} />
         </Routes>
       </Layout>
     </MovieProvider>
