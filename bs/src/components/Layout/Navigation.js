@@ -5,11 +5,11 @@ import SearchForm from "./SearchForm";
 import SectionHeader from "./SectionHeader";
 
 const Navigation = (props) => {
-  const location = useLocation();
+  // const location = useLocation();
 
   // extract location and limit the display of some elements on the upload console.
-  const url = location.pathname;
-  const isUpload = url === "/uploads";
+  // const url = location.pathname;
+  // const isUpload = url === "/uploads";
 
   return (
     <Modal onDismiss={props.onDismiss}>

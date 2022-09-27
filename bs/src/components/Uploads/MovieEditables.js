@@ -1,37 +1,29 @@
-import { useEffect, useState } from "react";
+import { Fragment, useContext } from "react";
+import ActionsContext from "../../store/actions-context";
 import MovieDataForm from "./MovieDataForm";
 import MovieInfo from "./MovieInfo";
 
 const MovieEditables = (props) => {
-  const [showInfo, setShowInfo] = useState(true);
-  // const [isEditing, setIsEditing] = useState(false);
-  const {movie} = props;
+  const { showInfo, activeMovie } = useContext(ActionsContext);
 
-  useEffect(()=>{
-    setShowInfo(true);
-  }, [movie]);
-
-  const editMovieHandler = () => {
-    setShowInfo(false);
-    // setIsEditing(true);
-    console.log("Edit button is working")
-  };
-
-  const defaultContent = (
-    <p className="text-center text-gray-700">
-      Select a movie to view the movie, edit the review and tags or delete the
-      movie.
-    </p>
+  const header = (
+    <div className="pl-44 pb-4 text-xl font-bold text-gray-700">
+      <h2>Add New Movie</h2>
+    </div>
   );
 
-  const isActive = movie ? true : false;
+  const isActive = activeMovie ? true : false;
 
   return (
     <div className={props.className}>
-      <div className="py-10">
-        {!isActive && defaultContent}
-        {showInfo && isActive && <MovieInfo activeMovie={movie} onEdit={editMovieHandler} />}
-        {!showInfo && <MovieDataForm movie={movie} />}
+      <div className="py-8 relative">
+        {showInfo && isActive && <MovieInfo />}
+        {!showInfo && (
+          <Fragment>
+            {header}
+            <MovieDataForm />
+          </Fragment>
+        )}
       </div>
     </div>
   );

@@ -1,47 +1,33 @@
-import { useCallback, useEffect, useState } from "react";
-import useHttp from "../../hooks/use-http";
+import { useCallback, useContext, useEffect, useState } from "react";
+import ActionsContext from "../../store/actions-context";
 
-const MovieDatabase = (props) => {
-  const [movies, setMovies] = useState([]);
+const MovieDatabase = () => {
   const [renderedMovies, setRenderedMovies] = useState([]);
-  const { fetchMovies } = useHttp();
-  const {onShowMovie} = props;
+  const {movies, getActiveMovie} = useContext(ActionsContext);
 
   const movieDetailsHandler = useCallback((event) => {
     const movieId = event.target.id;
     const selected = movies.find((movie) => movie.id === movieId);
-    onShowMovie(selected);
-  }, [movies, onShowMovie]);
+    getActiveMovie(selected);
+  }, [movies, getActiveMovie]);
 
   useEffect(() => {
-    const extractedMovies = fetchMovies();
-    const movieItems = [];
-
-    extractedMovies.then((movie) => {
-      for (const key in movie) {
-        movieItems.push({
-          key: key,
-          ...movie[key],
-        });
-      }
-      const formatMovieItems = movieItems.map((movieItem) => (
-        <li
-          className="py-2 px-5 cursor-pointer hover:bg-white"
-          key={movieItem.key}
-          id={movieItem.id}
-          onClick={movieDetailsHandler}
-        >
-          {movieItem.title}
-        </li>
-      ));
-      setRenderedMovies(formatMovieItems);
-      setMovies(movieItems)
-    });
-  }, [fetchMovies, movieDetailsHandler]);
+    const formatMovieItems = movies.map((movieItem) => (
+      <li
+        className="py-2 px-5 cursor-pointer hover:bg-white"
+        key={movieItem.key}
+        id={movieItem.id}
+        onClick={movieDetailsHandler}
+      >
+        {movieItem.title}
+      </li>
+    ));
+    setRenderedMovies(formatMovieItems);
+    }, [movies, movieDetailsHandler]);
 
   return (
     <div className="text-sm text-gray-800 px-10">
-      <h2 className="border-b mb-3 py-1">Database</h2>
+      <h2 className="border-b mb-3 py-1"> Select a movie to view, edit or delete</h2>
       <ul className="">{renderedMovies}</ul>
     </div>
   );

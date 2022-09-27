@@ -15,7 +15,7 @@ const MovieSideBar = (props) => {
         </ul>
       </div> */}
       <MovieFinder />
-      <MovieDatabase onShowMovie={props.onShowMovie} />
+      <MovieDatabase />
     </div>
   );
 };

@@ -1,4 +1,7 @@
+import { Fragment, useContext } from "react";
+import ActionsContext from "../../store/actions-context";
 import Card from "../UI/Card";
+import MovieActions from "./MovieActions";
 
 const months = [
   "January",
@@ -15,14 +18,15 @@ const months = [
   "December",
 ];
 
-const MovieInfo = (props) => {
-  const { activeMovie, onEdit } = props;
+const MovieInfo = () => {
+  const { activeMovie } = useContext(ActionsContext);
 
   const date = new Date(activeMovie["release date"]);
   let month = months[date.getMonth()];
   const formattedDate = `${month} ${date.getDate()}, ${date.getFullYear()}`;
 
   return (
+    <Fragment>
     <Card className="text-gray-700">
       <div>
         <div className="flex justify-between items-center">
@@ -75,16 +79,9 @@ const MovieInfo = (props) => {
           </p>
         </div>
       </div>
-
-      <div className="flex justify-center pt-10">
-        <button
-          onClick={onEdit}
-          className="bg-red-900 text-white px-7 py-2 rounded-sm"
-        >
-          Edit
-        </button>
-      </div>
     </Card>
+    <MovieActions />      
+    </Fragment>
   );
 };
 

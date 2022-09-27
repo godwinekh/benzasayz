@@ -24,7 +24,10 @@ yarn-error.log*
 
 #web vitals
 */reportWebVitals.js
+ui-debug.log
 
 #firebase
 .firebase*
 firebase*
+database*
+storage.rules
