@@ -1,14 +1,14 @@
-import { Fragment } from "react";
+import AuthProvider from "../../store/AuthProvider";
 import Footer from "./Footer";
 import Header from "./Header";
 
 const Layout = (props) => {
   return (
-    <Fragment>
+    <AuthProvider>
       <Header />
       {props.children}
       <Footer />
-    </Fragment>
+    </AuthProvider>
   );
 };
 

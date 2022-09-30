@@ -11,7 +11,7 @@ import Notification from "../UI/Notification";
 const newMovieSchema = yup.object({
     title: yup.string().required(),
     synopsis: yup.string().required(),
-    "release date": yup.date("You need to enter a valid date").required(),
+    "release-date": yup.date("You need to enter a valid date").required(),
     rating: yup.number().positive(),
     cast: yup.string().required(),
     genre: yup.string().required(),
@@ -70,7 +70,7 @@ const newMovieSchema = yup.object({
   .object({
     title: yup.string().required(),
     synopsis: yup.string().required(),
-    "release date": yup.date("You need to enter a valid date").required(),
+    "release-date": yup.date("You need to enter a valid date").required(),
     rating: yup.number().positive(),
     cast: yup.string().required(),
     genre: yup.string().required(),
@@ -117,7 +117,7 @@ const MovieDataForm = (props) => {
       <Input label="synopsis" type="text" register={register} error={errors.synopsis} />
       
       <div className="flex gap-5">
-        <Input label="release date" type="date" register={register} error={errors["release date"]} />
+        <Input label="release-date" type="date" register={register} error={errors["release-date"]} />
         <Input label="rating" type="text" register={register} error={errors.rating} />
       </div>
       
@@ -138,6 +138,7 @@ const MovieDataForm = (props) => {
       <Input label="trailer" type="text" register={register} error={errors.trailer} />
       <Input label="download" type="text" register={register} error={errors.download} />
       <Input label="tags" type="text" register={register} error={errors.tags} />
+      <p className="text-sm text-gray-700"><i>You can choose two categories, separated by commas: Upcoming, General, Playlist, Freshers</i></p>
     </Fragment>
   );
 

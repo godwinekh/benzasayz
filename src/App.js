@@ -7,6 +7,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Queried from "./pages/Queried";
 import Uploads from "./pages/Uploads";
+import AuthProvider from "./store/AuthProvider";
+import UploadAuth from "./components/Uploads/UploadAuth";
 
 const App = () => {
   return (
@@ -17,7 +19,8 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/reviews" element={<Reviews />} /> 
           <Route path="/reviews/search/:movieTitle" element={<Queried />} />
-          <Route path="/uploads" element={<Uploads />} />
+          <Route path="/console/uploads" element={<AuthProvider><Uploads /></AuthProvider>} />
+          <Route path="/console/admin/authenticate-user" element={<AuthProvider><UploadAuth /></AuthProvider>} />
         </Routes>
       </Layout>
     </MovieProvider>

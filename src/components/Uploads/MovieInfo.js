@@ -3,27 +3,8 @@ import ActionsContext from "../../store/actions-context";
 import Card from "../UI/Card";
 import MovieActions from "./MovieActions";
 
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
 const MovieInfo = () => {
   const { activeMovie } = useContext(ActionsContext);
-
-  const date = new Date(activeMovie["release date"]);
-  let month = months[date.getMonth()];
-  const formattedDate = `${month} ${date.getDate()}, ${date.getFullYear()}`;
 
   return (
     <Fragment>
@@ -49,7 +30,7 @@ const MovieInfo = () => {
         <div className="px-5">
           <p>
             <span className="pr-5">Release Date: </span>
-            {formattedDate}
+            {activeMovie.releaseDate}
           </p>
           <p>
             <span className="pr-5">Cast: </span>

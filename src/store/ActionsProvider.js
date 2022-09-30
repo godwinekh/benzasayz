@@ -4,6 +4,22 @@ import ActionsContext from "./actions-context";
 import { ref, push, child, set, onValue, update, remove } from "firebase/database";
 import { ref as storageBucketRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
+// Helper constant for formatting date input
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
 // Default state for the Upload component
 const defaultState = {
   movies: [],
@@ -167,8 +183,9 @@ const ActionsProvider = (props) => {
       dispatch({type: "COMPLETED", message: `Warning: ${movie.title} is already in the database.`});
       return;
     };
+
     // if movie is updating, use existing movie id to overwrite previous images else create a new movie id.
-    const totalIndex = Object.keys(moviesSnapshot).length ? Object.keys(moviesSnapshot).length : 0;
+    const totalIndex = moviesSnapshot ? Object.keys(moviesSnapshot).length : 0;
     const newIndex = totalIndex + 1;
     const id = `m${newIndex}`;
     // setNewMovie({id:id, ...movie});
@@ -229,12 +246,17 @@ const ActionsProvider = (props) => {
   const addMovieItem = async (movie) => {
     const item = await uploadNewMovieHandler(movie);
 
+    // formatting date for storage
+    const date = new Date(item['release-date']);
+    let month = months[date.getMonth()];
+    const formattedDate = `${month} ${date.getDate()}, ${date.getFullYear()}`;
+
     //formatting data for database
     const transformData = {
       id: item.id,
       title: item.title,
       synopsis: item.synopsis,
-      "release date": item['release date'],
+      releaseDate: formattedDate,
       rating: item.rating,
       cast: item.cast,
       genre: item.genre,
@@ -269,11 +291,17 @@ const ActionsProvider = (props) => {
   const updateMovieItem = (movie) => {
     dispatch({type: "PENDING"});
     const updates = {};
+
+    // formatting date for storage
+    const date = new Date(movie['release-date']);
+    let month = months[date.getMonth()];
+    const formattedDate = `${month} ${date.getDate()}, ${date.getFullYear()}`;
+
     const stripObjectKey = {
       id: movie.id,
       title: movie.title,
       synopsis: movie.synopsis,
-      "release date": movie['release date'],
+      releaseDate: formattedDate,
       rating: movie.rating,
       cast: movie.cast,
       genre: movie.genre,

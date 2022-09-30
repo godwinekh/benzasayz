@@ -1,5 +1,6 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 import Modal from "../UI/Modal";
 import SearchForm from "./SearchForm";
 import SectionHeader from "./SectionHeader";
@@ -80,18 +81,26 @@ const Navigation = (props) => {
 
 export const InlineNavigation = () => {
   const location = useLocation();
+  const { logout } = useContext(AuthContext);
 
   // extract location and limit the display of some elements on the upload console.
   const url = location.pathname;
-  const isUpload = url === "/uploads";
+  const isUpload = url === "/console/uploads" || url === "/console/admin/authenticate-user";
+  const isUploadLogout = url === "/console/uploads";
 
   return (
-    <ul className="hidden md:flex flex-row jusify-evenly gap-10 items-center py-1.5">
+    <ul
+      className={`hidden md:flex flex-row gap-10 items-center py-1.5 ${
+        isUpload ? "justify-between px-10" : "justify-evenly"
+      }`}
+    >
       {!isUpload && (
         <li className="md:hidden lg:inline-block lg:grow ">
           <SearchForm />
         </li>
       )}
+
+      {/* Displays for all urls */}
       <li className="md:pl-10 lg:px-0">
         <NavLink
           to="/home"
@@ -102,6 +111,7 @@ export const InlineNavigation = () => {
           Home
         </NavLink>
       </li>
+
       {!isUpload && (
         <Fragment>
           <li>
@@ -137,6 +147,13 @@ export const InlineNavigation = () => {
             </div>
           </li>
         </Fragment>
+      )}
+
+      {/* Displays for only the upload url */}
+      {isUploadLogout && (
+        <li className="md:pl-10 lg:px-0 text-2xl">
+          <button onClick={logout}><i className="bi-box-arrow-right"></i></button>
+        </li>
       )}
     </ul>
   );
