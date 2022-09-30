@@ -86,11 +86,18 @@ const movieReducer = (state, action) => {
 
     if (keywords) {
       queriedMovies = state.movies.filter((movie) =>
-        movie.title.includes(keywords)
+        movie.title?.includes(keywords)
       );
     } else {
-      console.log("else statement is working");
-      queriedMovies = action.item.snapshot;
+      const data = action.item.snapshot;
+      const movieItems = [];
+      for (const key in data) {
+        movieItems.push({
+          key: key,
+          ...data[key],
+        });
+      }
+      queriedMovies = movieItems;
     }
 
     return {

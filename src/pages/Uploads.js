@@ -16,7 +16,7 @@ const Uploads = () => {
   
   return (
     <ActionsProvider>
-      <div className="flex flex-row mt-16 pb-2">
+      <div className="flex flex-row mt-16 pb-2 relative">
         <MovieSideBar className="basis-1/3" />
         <MovieEditables className="basis-2/3" />
       </div>

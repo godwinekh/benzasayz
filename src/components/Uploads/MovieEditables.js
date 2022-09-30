@@ -7,7 +7,7 @@ const MovieEditables = (props) => {
   const { showInfo, activeMovie } = useContext(ActionsContext);
 
   const header = (
-    <div className="pl-44 pb-4 text-xl font-bold text-gray-700">
+    <div className="text-center pb-4 text-xl font-bold text-gray-700">
       <h2>Add New Movie</h2>
     </div>
   );
