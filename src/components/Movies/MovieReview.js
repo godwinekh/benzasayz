@@ -12,7 +12,8 @@ const MovieReview = (props) => {
   return (
     <Modal onDismiss={props.onDismiss}>
       <div className="bg-gray-900 text-gray-100">
-        <img className="" src={movieItem.imagePath} alt={""} />
+        {<img className="" src={movieItem.imageUrl.imageLsc} alt={""} />}
+        {}
 
         <div className="flex flex-row justify-between font-bold text-xl p-3">
           <h3 className="capitalize text-lg">{movieItem.title}</h3>
@@ -26,9 +27,9 @@ const MovieReview = (props) => {
             <p>
               release date: {movieItem.releaseDate} <span></span>
             </p>
-            <p>genre: {movieItem.genre.join(" | ")}</p>
+            <p>genre: {movieItem.genre}</p>
             <p className="leading-5">
-              starring: {movieItem.cast.join(", ")}
+              starring: {movieItem.cast}
             </p>
           </div>
 
@@ -40,7 +41,7 @@ const MovieReview = (props) => {
               <p className="mt-2">Watch Trailer</p>
             </div>
             <div className="text-center">
-              <a href={movieItem.download}>
+              <a href={movieItem.download} disabled={movieItem.download?true:false}>
                 <i className="bi-box-arrow-down text-4xl text-stone-700"></i>
               </a>
               <p className="mt-3">Download</p>
@@ -50,7 +51,7 @@ const MovieReview = (props) => {
 
         <div className="px-8 py-10 bg-slate-700 text-gray-100">
           <h3 className="pb-3 font-bold text-lg">Benza says:</h3>
-          <p>{movieItem.fullReview}</p>
+          <p>{movieItem.review}</p>
         </div>
       </div>
     </Modal>

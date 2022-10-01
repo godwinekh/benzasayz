@@ -7,16 +7,16 @@ const Overview = (props) => {
   const movieCtx = useContext(MovieContext);
   const { movies } = movieCtx;
 
-  const contents = movies.map((movie) => (
+  const filteredMovies = movies.filter(movie => movie.rating > 7);
+
+  const contents = filteredMovies.map((movie) => (
     <MoviePreview
       key={movie.id}
       id={movie.id}
       className={`basis-1/4 shadow-xl shadow-slate-900 hover:scale-105 bg-image-full`}
-      title={movie.title}
       rating={movie.rating}
-      synopsis={movie.synopsis}
       style={{
-        backgroundImage: `url(${movie.imagePath})`,
+        backgroundImage: `url(${movie.imageUrl.imagePrt})`,
         height: "28em",
         width: "auto",
         zIndex: "auto",
@@ -26,7 +26,7 @@ const Overview = (props) => {
 
   const favorites = contents.slice(0, 3);
 
-  const getCenterIndex = movies.map((movie) => (
+  const getCenterIndex = filteredMovies.map((movie) => (
     <MoviePreview
       key={movie.id}
       id={movie.id}
@@ -34,11 +34,11 @@ const Overview = (props) => {
       title={movie.title}
       rating={movie.rating}
       synopsis={movie.synopsis}
-      style={{ backgroundImage: `url(${movie.imagePath})`, height: "32em" }}
+      style={{ backgroundImage: `url(${movie.imageUrl.imageLsc})`, height: "32em" }}
     />
   ));
 
-  favorites[1] = getCenterIndex[3];
+  favorites[1] = getCenterIndex[2];
 
   return (
     <Fragment>

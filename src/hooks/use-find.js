@@ -21,7 +21,7 @@ const useFind = () => {
           title={checkExactMatch.title}
           rating={checkExactMatch.rating}
           synopsis={checkExactMatch.synopsis}
-          style={{ backgroundImage: `url(${checkExactMatch.imagePath})` }}
+          style={{ backgroundImage: `url(${checkExactMatch.imageUrl.imagePrt})` }}
         />
       );
       return movieMatch;
@@ -59,7 +59,7 @@ const useFind = () => {
           title={movie.title}
           rating={movie.rating}
           synopsis={movie.synopsis}
-          style={{ backgroundImage: `url(${movie.imagePath})` }}
+          style={{ backgroundImage: `url(${movie.imageUrl.imagePrt})` }}
         />
       ));
       const similarMatches = foundMatches;
@@ -74,7 +74,7 @@ const useFind = () => {
           title={movie.title}
           rating={movie.rating}
           synopsis={movie.synopsis}
-          style={{ backgroundImage: `url(${movie.imagePath})` }}
+          style={{ backgroundImage: `url(${movie.imageUrl.imagePrt})` }}
         />
       ));
       const similarMatches = randomMatches;

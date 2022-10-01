@@ -81,7 +81,7 @@ const movieReducer = (state, action) => {
   }
 
   if (action.type === "QUERIED") {
-    const keywords = action.item.keywords;
+    const keywords = action.item.keywords.toLowerCase();
     let queriedMovies;
 
     if (keywords) {
@@ -261,7 +261,7 @@ const ActionsProvider = (props) => {
     //formatting data for database
     const transformData = {
       id: item.id,
-      title: item.title,
+      title: item.title.toLowerCase(),
       synopsis: item.synopsis,
       releaseDate: formattedDate,
       rating: item.rating,

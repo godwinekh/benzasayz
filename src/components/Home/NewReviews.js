@@ -8,20 +8,22 @@ const NewReviews = (props) => {
   const movieCtx = useContext(MovieContext);
   const { movies } = movieCtx;
 
+
   const contents = movies.map((movie) => (
     <MoviePreview
       className="text-gray-100 bg-image-full"
-      key={movie.id}
+      key={movie.key}
       id={movie.id}
-      title={movie.title}
+      title={movie.title.toUpperCase()}
       rating={movie.rating}
-      synopsis={movie.synopsis}
-      style={{ backgroundImage: `url(${movie.imagePath})` }}
+      trailer={movie.trailer}
+      synopsis={movie.synopsis.split(".")[0]}
+      style={{ backgroundImage: `url(${movie.imageUrl.imagePrt})` }}
     />
   ));
 
   return (
-    <section className="pt-8 bg-gray-700 -mt-1">
+    <section className="pt-8 bg-gray-700 -mt-1 relative">
       <SectionHeader className="mb-8 text-3xl">New Reviews</SectionHeader>
       <div className="md:grid gap-7 md:grid-cols-2 lg:grid-cols-5 md:mb-10 md:px-5">
         {contents}

@@ -1,8 +1,19 @@
 import React, { Fragment, useState } from "react";
 import MovieReview from "./MovieReview";
+import MovieTrailer from "./MovieTrailer";
 
 const MoviePreview = (props) => {
   const [movieModal, setMovieModal] = useState(false);
+  const [showTrailer, setShowTrailer] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+
+  const toggleTrailerHandler = () => {
+    setShowTrailer(prevState => !prevState);
+  };
+
+  const toggleSummaryHandler = () => {
+    setShowSummary(prevState => !prevState);
+  };
 
   const showReviewHandler = (event) => {
     setMovieModal(true);
@@ -24,11 +35,11 @@ const MoviePreview = (props) => {
 
   return (
     <Fragment>
-      <div
+      <div onMouseEnter={toggleSummaryHandler} onMouseLeave={toggleSummaryHandler}
         className={`${props.className} relative hover:scale-105`}
         style={props.style}
       >
-        <div
+        <div 
           className={`container p-5 bg-gradient-to-b from-transparent to-slate-900 absolute -bottom-1`}
         >
           <h2
@@ -37,7 +48,7 @@ const MoviePreview = (props) => {
           >
             {props.title}
           </h2>
-          <p className="py-5">{props.synopsis}</p>
+          {showSummary && <p className="py-5">{props.synopsis}...</p>}
           <div
             id="links"
             className="flex flex-row gap-3 items-center text-stone-400"
@@ -45,9 +56,9 @@ const MoviePreview = (props) => {
             <p className={`${ratingColor} px-2 py-1 font-bold text-lg`}>
               {props.rating}
             </p>
-            <a href="/" alt={"trailer on youtube"}>
+            <button onClick={toggleTrailerHandler}>
               <i className="bi-youtube text-3xl hover:text-red-800"></i>
-            </a>
+            </button>
             <a href="/" alt={"get download link"}>
               <i className="bi-download text-xl"></i>
             </a>
@@ -59,6 +70,7 @@ const MoviePreview = (props) => {
             </p>
           </div>
         </div>
+        {showTrailer && <MovieTrailer onClose={toggleTrailerHandler} trailer={props.trailer} />}
       </div>
 
       {movieModal && <MovieReview onDismiss={closeReviewHandler} movieId={props.id} />}

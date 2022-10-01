@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import MovieContext from "./movie-context";
+import { db } from "./../firebase-config";
+import { ref, onValue } from "firebase/database";
 
 const movieContext = {
   movies: [
@@ -106,9 +108,32 @@ const movieContext = {
   ],
 };
 
+
 const MovieProvider = (props) => {
+  const [movies, setMovies] = useState();
+  const renderMovies = [];
+
+
+  // Retrieve all movie reference from firebase database
+  useEffect(() => {    
+    const extractedMovies = ref(db, "/movies");
+    onValue(extractedMovies, (snapshot) => {
+      const data = snapshot.val();
+      setMovies(data);
+    });
+  }, []);
+
+  // Reformat movies from database for use
+  for (const key in movies) {
+    renderMovies.push({
+      key: key,
+      ...movies[key],
+    });
+  };
+
+
   return (
-    <MovieContext.Provider value={movieContext}>
+    <MovieContext.Provider value={{movies: renderMovies}}>
       {props.children}
     </MovieContext.Provider>
   );
