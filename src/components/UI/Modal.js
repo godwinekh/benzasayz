@@ -20,14 +20,14 @@ const ModalOverlay = (props) => {
 
 const EmbedBackdrop = (props) => {
   return (
-    <div onClick={props.dismiss} className="fixed w-full h-full lg:bottom-0 lg:left-0 lg:w-2/5 lg:h-3/5 lg:bg-gradient-to-b from-gray-900 to-black bg-black bg-opacity-95 z-30"></div>
+    <div onClick={props.dismiss} className="fixed w-full h-full lg:-bottom-5 lg:-left-5 lg:w-2/5 lg:h-3/5 bg-gradient-to-r from-stone-900 to-black bg-opacity-90 z-30"></div>
   );
 };
 
 const EmbedModalOverlay = (props) => {
   return (
     <div className="flex justify-center">
-      <div className="fixed top-32 lg:top-auto lg:bottom-5 lg:left-12 w-full md:w-4/5 md:h-3/7 lg:w-1/3 lg:h-1/2 z-40">
+      <div className="fixed top-32 lg:top-auto lg:bottom-5 lg:left-9 w-full md:w-4/5 md:h-3/7 lg:w-1/3 lg:h-1/2 z-40">
         <div className="relative mx-auto">
           <button type="button" className="absolute -top-4 -right-4 text-3xl text-stone-200" onClick={props.onClose}><i className="bi-x-circle-fill"></i></button>
         </div>

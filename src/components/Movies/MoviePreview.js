@@ -51,22 +51,24 @@ const MoviePreview = (props) => {
           {showSummary && <p className="py-5">{props.synopsis}...</p>}
           <div
             id="links"
-            className="flex flex-row gap-3 items-center text-stone-400"
-          >
-            <p className={`${ratingColor} px-2 py-1 font-bold text-lg`}>
-              {props.rating}
-            </p>
-            <button onClick={toggleTrailerHandler}>
-              <i className="bi-youtube text-3xl hover:text-red-800"></i>
-            </button>
-            <a href="/" alt={"get download link"}>
-              <i className="bi-download text-xl"></i>
-            </a>
+            className="flex flex-row justify-between items-center text-stone-400"
+          > 
+            <div className="flex flex-row gap-3 items-center">
+              <p className={`${ratingColor} px-2 py-1 font-bold text-lg`}>
+                {props.rating}
+              </p>
+              <button onClick={toggleTrailerHandler}>
+                <i className="bi-youtube text-3xl hover:text-red-800"></i>
+              </button>
+              <a href="/" alt={"get download link"}>
+                <i className="bi-download text-xl"></i>
+              </a>
+            </div>
             <p
               className="capitalize text-md hover:text-yellow-500 hover:cursor-pointer"
               onClick={showReviewHandler}
             >
-              bs review
+              <i className="bi-file-earmark-text-fill text-yellow-600 text-3xl"></i>
             </p>
           </div>
         </div>

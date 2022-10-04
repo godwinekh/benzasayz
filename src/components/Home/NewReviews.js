@@ -24,14 +24,14 @@ const NewReviews = (props) => {
 
   return (
     <section className="pt-8 bg-gray-700 -mt-1 relative">
-      <SectionHeader className="mb-8 text-3xl">New Reviews</SectionHeader>
+      <SectionHeader className="mb-8 text-3xl">Top Reviews</SectionHeader>
       <div className="md:grid gap-7 md:grid-cols-2 lg:grid-cols-5 md:mb-10 md:px-5">
         {contents}
       </div>
 
-      <div className="bg-slate-900 pt-10 p-5 text-center">
-        <Link to="/reviews" className="px-3 py-2 text-yellow-500 rounded-lg">
-          More Reviews <i className="bi-arrow-right"></i>
+      <div className="bg-slate-900 py-14 text-center">
+        <Link to="/reviews" className="py-4 px-10 text-stone-200 bg-gray-700 rounded-lg">
+          More Reviews <i className="bi-arrow-right ml-5"></i>
         </Link>
       </div>
     </section>

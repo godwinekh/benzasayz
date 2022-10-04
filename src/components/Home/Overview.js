@@ -11,8 +11,8 @@ const Overview = (props) => {
 
   const contents = filteredMovies.map((movie) => (
     <MoviePreview
-      key={movie.id}
-      id={movie.id}
+      key={movie.key}
+      id={movie.key}
       className={`basis-1/4 shadow-xl shadow-slate-900 hover:scale-105 bg-image-full`}
       rating={movie.rating}
       style={{
