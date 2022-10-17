@@ -1,7 +1,8 @@
 import React from "react"
 
 const MovieContext = React.createContext({
-  movies: []
+  movies: [],
+  isLoaded: null
 });
 
 export default MovieContext;

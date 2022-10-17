@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import MovieContext from "../../store/movie-context";
 import MoviePreview from "../Movies/MoviePreview";
 import Button from "../UI/Button";
+import LoadingSpinner from "../UI/LoadingSpinner";
 import SubPanel from "./SubPanel";
 
 const ReviewsList = () => {
   const movieCtx = useContext(MovieContext);
-  const { movies } = movieCtx;
+  const { movies, isLoaded } = movieCtx;
 
   const previews = movies.map((movie) => (
     <MoviePreview
@@ -15,8 +16,7 @@ const ReviewsList = () => {
       id={movie.id}
       title={movie.title}
       rating={movie.rating}
-      synopsis={movie.synopsis}
-      style={{ backgroundImage: `url(${movie.imagePath})` }}
+      style={{ backgroundImage: `url(${movie.imageUrl.imagePrt})` }}
     />
   ));
 
@@ -28,6 +28,12 @@ const ReviewsList = () => {
         <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-6">
           {previews}
         </div>
+
+        {!isLoaded && (
+          <div className="flex justify-center my-14">
+            <LoadingSpinner />
+          </div>
+        )}
 
         <div className="flex flex-row justify-between py-5 text-stone-300">
           <Button className="px-3 py-2 bg-gray-800">

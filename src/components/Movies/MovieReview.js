@@ -12,36 +12,50 @@ const MovieReview = (props) => {
   return (
     <Modal onDismiss={props.onDismiss}>
       <div className="bg-gray-900 text-gray-100">
-        {<img className="" src={movieItem.imageUrl.imageLsc} alt={""} />}
-        {}
+        <img className="" src={movieItem.imageUrl.imageLsc} alt={""} />
 
         <div className="flex flex-row justify-between font-bold text-xl p-3">
           <h3 className="capitalize text-lg">{movieItem.title}</h3>
           <p className="text-amber-500">
-            <i className="bi-star mr-1"></i> {movieItem.rating}
+            <i className="bi-star mr-1"></i> {movieItem.rating.toFixed(1)}
           </p>
         </div>
 
-        <div className="p-3 bg-gray-100 text-stone-700">
+        <div className="px-5 py-3 bg-gray-100 text-stone-700">
+          <div className="leading-relaxed py-5">
+            <p>{movieItem.synopsis}</p>
+          </div>
+
           <div className="leading-relaxed capitalize py-3">
             <p>
-              release date: {movieItem.releaseDate} <span></span>
+              <b>release date:</b> {movieItem.releaseDate} <span></span>
             </p>
-            <p>genre: {movieItem.genre}</p>
+            <p>
+              <b>genre:</b> {movieItem.genre}
+            </p>
             <p className="leading-5">
-              starring: {movieItem.cast}
+              <b>starring:</b> {movieItem.cast}
             </p>
           </div>
 
-          <div className="flex flex-row gap-5 justify-evenly py-8 items-end">
+          <div className="py-14">
+            <iframe
+              className="w-full h-48 md:h-80"
+              src={movieItem.trailer}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+
+          <div className="flex flex-row gap-5 justify-evenly pb-8 items-end">
             <div className="text-center">
-              <a href={movieItem.trailer}>
-                <i className="bi-youtube text-5xl text-red-600"></i>
-              </a>
-              <p className="mt-2">Watch Trailer</p>
-            </div>
-            <div className="text-center">
-              <a href={movieItem.download} disabled={movieItem.download?true:false}>
+              <a
+                href={movieItem.download}
+                disabled={movieItem.download ? true : false}
+                className="disabled:cursor-not-allowed disabled:text-gray-400"
+              >
                 <i className="bi-box-arrow-down text-4xl text-stone-700"></i>
               </a>
               <p className="mt-3">Download</p>

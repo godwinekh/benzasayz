@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from "react";
 import { db, storage } from "../firebase-config.js";
 import ActionsContext from "./actions-context";
 import { ref, push, child, set, onValue, update, remove } from "firebase/database";
-import { ref as storageBucketRef, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref as storageBucketRef, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 
 // Helper constant for formatting date input
 const months = [
@@ -111,7 +111,7 @@ const movieReducer = (state, action) => {
 
   // all status action for UI feedback
   if (action.type === "PENDING") {
-    const newStatus = {...state.status, pending: true}
+    const newStatus = {pending: true, message: ""}
     return {
       movies: state.movies,
       showInfo: state.showInfo,
@@ -155,12 +155,15 @@ const ActionsProvider = (props) => {
   
   // Tigger addition of movie data to realtime database after image upload to storage is successful
   useEffect(() => {
-    if (url.imageLsc !== '' && url.imagePrt !== '') {
+    if (newKey && url.imageLsc !== '' && url.imagePrt !== '') {
       const updates = {};
       const imageUrl = {imageLsc: url.imageLsc, imagePrt: url.imagePrt};
       updates[`movies/${newKey}/imageUrl`] = imageUrl;
 
-      update(ref(db), updates);
+      update(ref(db), updates).then(()=> {
+        const response = "Success: Movie upload has been saved in the database!";
+        dispatch({ type: "COMPLETED", message: response });
+      });
     }
   }, [url, newKey]);
 
@@ -192,10 +195,12 @@ const ActionsProvider = (props) => {
     };
 
     // if movie is updating, use existing movie id to overwrite previous images else create a new movie id.
-    const totalIndex = moviesSnapshot ? Object.keys(moviesSnapshot).length : 0;
-    const newIndex = totalIndex + 1;
-    const id = `m${newIndex}`;
-    // setNewMovie({id:id, ...movie});
+    // const totalIndex = moviesSnapshot ? Object.keys(moviesSnapshot).length : 0;
+    // const newIndex = totalIndex + 1;
+    // const id = `m${newIndex}`;
+
+    // Get a key for a new Post.
+    const id = push(child(ref(db), 'movies')).key;
 
     //processing image upload first: create a reference to firebase storage
     const storageRef = storageBucketRef(storage);
@@ -274,16 +279,11 @@ const ActionsProvider = (props) => {
       imageUrl: {imageLsc: url.imageLsc, imagePrt: url.imagePrt},
     };
     
-    // Get a key for a new Post.
-    const newPostKey = push(child(ref(db), 'posts')).key;
-
     // send data to db and watch for changes
-    set(ref(db, "movies/" + newPostKey), {
+    set(ref(db, "movies/" + item.id), {
       ...transformData
     })
       .then(() => {
-        const response = "Success: Movie upload has been saved in the database!";
-        dispatch({ type: "COMPLETED", message: response });
         console.log("Data saved successfully!");
       })
       .catch((error) => {
@@ -292,7 +292,7 @@ const ActionsProvider = (props) => {
         console.log("The write failed because " + error);
       });
     
-    setNewKey(newPostKey);
+    setNewKey(item.id);
   };
 
   const updateMovieItem = (movie) => {
@@ -332,12 +332,30 @@ const ActionsProvider = (props) => {
   };
 
   const removeMovieItem = () => {
+    dispatch({type: "PENDING"});
+    alert("are you sure?");
     const title = state.activeMovie.title;
+
+    const image1 = state.activeMovie.imageUrl.imagePrt.split("%2F");
+    const imageTitle1 = image1[2].split("?");
+    const image2 = state.activeMovie.imageUrl.imageLsc.split("%2F");
+    const imageTitle2 = image2[2].split("?");
+
+    const imageRef1 = storageBucketRef(storage, `images/${state.activeMovie.key}/${imageTitle1[0]}`);
+    const imageRef2 = storageBucketRef(storage, `images/${state.activeMovie.key}/${imageTitle2[0]}`);
 
     remove(ref(db, `movies/${state.activeMovie.key}`))
       .then(() => {
-        const response = `Success: ${title} has been removed from database!`;
-        dispatch({ type: "COMPLETED", message: response });
+        deleteObject(imageRef1).then(() => {
+          // File deleted successfully
+          deleteObject(imageRef2);
+          const response = `Success: ${title} has been removed from database!`;
+          dispatch({ type: "COMPLETED", message: response });
+          console.log("images and movie successfully removed");
+        }).catch((error) => {
+          // Uh-oh, an error occurred!
+          console.log(error);
+        });
       })
       .catch((error) => {
         const response = `Failed: ${title} was not removed due to ${error}. Please try again!`;

@@ -3,21 +3,20 @@ import MoviePreview from "../Movies/MoviePreview";
 import SectionHeader from "../Layout/SectionHeader";
 import MovieContext from "../../store/movie-context";
 import { Link } from "react-router-dom";
+import LoadingSpinner from "../UI/LoadingSpinner";
 
 const NewReviews = (props) => {
   const movieCtx = useContext(MovieContext);
-  const { movies } = movieCtx;
+  const { movies, isLoaded } = movieCtx;
 
 
   const contents = movies.map((movie) => (
     <MoviePreview
       className="text-gray-100 bg-image-full"
-      key={movie.key}
+      key={movie.id}
       id={movie.id}
-      title={movie.title.toUpperCase()}
+      title={movie.title}
       rating={movie.rating}
-      trailer={movie.trailer}
-      synopsis={movie.synopsis.split(".")[0]}
       style={{ backgroundImage: `url(${movie.imageUrl.imagePrt})` }}
     />
   ));
@@ -28,6 +27,12 @@ const NewReviews = (props) => {
       <div className="md:grid gap-7 md:grid-cols-2 lg:grid-cols-5 md:mb-10 md:px-5">
         {contents}
       </div>
+
+      {isLoaded && (
+          <div className="flex justify-center my-14">
+            <LoadingSpinner />
+          </div>
+        )}
 
       <div className="bg-slate-900 py-14 text-center">
         <Link to="/reviews" className="py-4 px-10 text-stone-200 bg-gray-700 rounded-lg">

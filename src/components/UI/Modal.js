@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Card from "./Card";
 
 const Backdrop = (props) => {
   return (
-    <div onClick={props.onDismiss} className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-70 z-30"></div>
+    <div onClick={props.dismiss} className="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-70 z-30"></div>
   );
 };
 
@@ -18,20 +19,16 @@ const ModalOverlay = (props) => {
   );
 }
 
-const EmbedBackdrop = (props) => {
-  return (
-    <div onClick={props.dismiss} className="fixed w-full h-full lg:-bottom-5 lg:-left-5 lg:w-2/5 lg:h-3/5 bg-gradient-to-r from-stone-900 to-black bg-opacity-90 z-30"></div>
-  );
-};
-
-const EmbedModalOverlay = (props) => {
+const ConsoleModalOverlay = (props) => {
   return (
     <div className="flex justify-center">
-      <div className="fixed top-32 lg:top-auto lg:bottom-5 lg:left-9 w-full md:w-4/5 md:h-3/7 lg:w-1/3 lg:h-1/2 z-40">
-        <div className="relative mx-auto">
-          <button type="button" className="absolute -top-4 -right-4 text-3xl text-stone-200" onClick={props.onClose}><i className="bi-x-circle-fill"></i></button>
-        </div>
-        {props.children}
+      <div className="fixed top-28 w-2/3 z-40">
+        <Card>
+          <div className="max-h-96 overflow-y-auto overscroll-auto text-justify pr-2">{props.children}</div>
+          <div className="flex justify-center">
+          <button className="bg-slate-800 text-stone-200 px-5 py-2 mt-10" onClick={props.onClose}>Close</button>
+          </div>
+        </Card>
       </div>
     </div>
   );
@@ -39,11 +36,11 @@ const EmbedModalOverlay = (props) => {
 
 const portalElement = document.getElementById('overlays');
 
-export const EmbedModal = (props) => {
+export const ConsoleModal = (props) => {
   return (
     <div>
-      {ReactDOM.createPortal(<EmbedBackdrop dismiss={props.onClose} />, portalElement)}
-      {ReactDOM.createPortal(<EmbedModalOverlay onClose={props.onClose}>{props.children}</EmbedModalOverlay>, portalElement)}       
+      {ReactDOM.createPortal(<Backdrop dismiss={props.onClose} />, portalElement)}
+      {ReactDOM.createPortal(<ConsoleModalOverlay onClose={props.onClose}>{props.children}</ConsoleModalOverlay>, portalElement)}       
     </div>
   );
 };
@@ -51,7 +48,7 @@ export const EmbedModal = (props) => {
 const Modal = (props) => {
   return (
     <div>
-      {ReactDOM.createPortal(<Backdrop onDismiss={props.onDismiss} />, portalElement)}
+      {ReactDOM.createPortal(<Backdrop dismiss={props.onDismiss} />, portalElement)}
       {ReactDOM.createPortal(<ModalOverlay onClose={props.onDismiss}>{props.children}</ModalOverlay>, portalElement)}       
     </div>
   );
