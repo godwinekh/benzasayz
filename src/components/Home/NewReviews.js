@@ -8,9 +8,10 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 const NewReviews = (props) => {
   const movieCtx = useContext(MovieContext);
   const { movies, isLoaded } = movieCtx;
+  const recent = [...movies.reverse().slice(0,15)];
 
 
-  const contents = movies.map((movie) => (
+  const contents = recent.map((movie) => (
     <MoviePreview
       className="text-gray-100 bg-image-full"
       key={movie.id}
@@ -23,12 +24,12 @@ const NewReviews = (props) => {
 
   return (
     <section className="pt-8 bg-gray-700 -mt-1 relative">
-      <SectionHeader className="mb-8 text-3xl">Top Reviews</SectionHeader>
+      <SectionHeader className="mb-8 text-3xl">Recently Added Reviews</SectionHeader>
       <div className="md:grid gap-7 md:grid-cols-2 lg:grid-cols-5 md:mb-10 md:px-5">
-        {contents}
+        {contents.reverse()}
       </div>
 
-      {isLoaded && (
+      {!isLoaded && (
           <div className="flex justify-center my-14">
             <LoadingSpinner />
           </div>

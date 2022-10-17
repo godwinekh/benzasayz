@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import MovieContext from "../../store/movie-context";
 import Modal from "../UI/Modal";
 
@@ -51,14 +51,24 @@ const MovieReview = (props) => {
 
           <div className="flex flex-row gap-5 justify-evenly pb-8 items-end">
             <div className="text-center">
-              <a
-                href={movieItem.download}
-                disabled={movieItem.download ? true : false}
-                className="disabled:cursor-not-allowed disabled:text-gray-400"
-              >
-                <i className="bi-box-arrow-down text-4xl text-stone-700"></i>
-              </a>
-              <p className="mt-3">Download</p>
+              {movieItem.download ? (
+                <Fragment>
+                  <a
+                    href={movieItem.download}
+                    className="disabled:cursor-not-allowed disabled:text-gray-400"
+                  >
+                    <i className="bi-box-arrow-down text-4xl text-stone-700"></i>
+                  </a>
+                  <p className="mt-3">Download</p>
+                </Fragment>
+              ) : (
+                <p>
+                  No download link is available yet for this movie. You can wait
+                  a little longer if the movie is not released yet or is a
+                  cinema-release movie. Otherwise you can request a download by
+                  clicking <a href="https://chat.whatsapp.com/G0EK5XFPNbf6eC48sjezkA" className="text-blue-700">here</a>
+                </p>
+              )}
             </div>
           </div>
         </div>

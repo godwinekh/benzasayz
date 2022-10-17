@@ -43,21 +43,8 @@ const Navigation = (props) => {
           </NavLink>
         </div>
 
-        <div className="py-3">
-          <NavLink
-            to="/blog"
-            className={(navItem) =>
-              navItem.isActive
-                ? "font-bold bi-caret-right-fill text-yellow-500"
-                : ""
-            }
-            onClick={props.onDismiss}
-          >
-            <span className="pl-1 text-black">Blog</span>
-          </NavLink>
-        </div>
         <div className="text-3xl">
-          <SectionHeader className="md:hidden text-black text-xl my-5">
+          <SectionHeader className="lg:hidden text-black text-xl my-5">
             connect on social media
           </SectionHeader>
           <div className="flex flex-row gap-5">
@@ -69,8 +56,21 @@ const Navigation = (props) => {
             >
               <i className="bi-instagram"></i>
             </a>
-            <a href="/" target="_blank" rel="noreferrer" alt="Whatsapp">
+            <a
+              href="https://chat.whatsapp.com/G0EK5XFPNbf6eC48sjezkA"
+              target="_blank"
+              rel="noreferrer"
+              alt="Whatsapp"
+            >
               <i className="bi-whatsapp"></i>
+            </a>
+            <a
+              href="https://t.me/bsmovielinks"
+              target="_blank"
+              rel="noreferrer"
+              alt="Telegram"
+            >
+              <i className="bi-telegram"></i>
             </a>
           </div>
         </div>
@@ -85,7 +85,8 @@ export const InlineNavigation = () => {
 
   // extract location and limit the display of some elements on the upload console.
   const url = location.pathname;
-  const isUpload = url === "/console/uploads" || url === "/console/admin/authenticate-user";
+  const isUpload =
+    url === "/console/uploads" || url === "/console/admin/authenticate-user";
   const isUploadLogout = url === "/console/uploads";
 
   return (
@@ -124,16 +125,6 @@ export const InlineNavigation = () => {
               Browse all reviews
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/blog"
-              className={(navItem) =>
-                navItem.isActive ? "font-bold text-yellow-500" : ""
-              }
-            >
-              Blog
-            </NavLink>
-          </li>
           <li className="px-7 text-3xl">
             <div>
               <a
@@ -152,7 +143,9 @@ export const InlineNavigation = () => {
       {/* Displays for only the upload url */}
       {isUploadLogout && (
         <li className="md:pl-10 lg:px-0 text-2xl">
-          <button onClick={logout}><i className="bi-box-arrow-right"></i></button>
+          <button onClick={logout}>
+            <i className="bi-box-arrow-right"></i>
+          </button>
         </li>
       )}
     </ul>

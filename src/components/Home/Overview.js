@@ -8,7 +8,13 @@ const Overview = (props) => {
   const movieCtx = useContext(MovieContext);
   const { movies, isLoaded } = movieCtx;
 
-  const filteredMovies = movies.filter(movie => movie.rating > 7);
+  const filteredMovies = movies.filter(movie => movie.rating > 6);
+
+  const min = 1;
+  const max = filteredMovies.length;
+  const range = max - min;
+  const randomNum = (Math.random() * range) + min;
+  console.log(randomNum);
 
   const contents = filteredMovies.map((movie) => (
     <MoviePreview
@@ -44,11 +50,11 @@ const Overview = (props) => {
   return (
     <Fragment>
       <h2 className="hidden lg:block pt-14 pb-10 text-center text-4xl font-extrabold bg-slate-900 text-stone-300">
-        Favourites
+        Top Picks You'd Like
       </h2>
       <div className="hidden lg:flex flex-row justify-center items-center pb-28 px-5 w-full text-white bg-gradient-to-b from-slate-900 to-gray-800">
         {favorites}
-        {isLoaded && <LoadingSpinner />}
+        {!isLoaded && <LoadingSpinner />}
       </div>
 
     </Fragment>

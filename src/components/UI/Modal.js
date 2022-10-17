@@ -10,7 +10,7 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
   return (
-    <div className="fixed top-0 right-0 w-full md:w-1/2 lg:w-2/5 h-full z-40 overflow-scroll overscroll-none transition ease-in-out duration-1000">
+    <div className="fixed top-0 right-0 w-full lg:w-1/2 h-full z-40 overflow-scroll overscroll-none">
         <div className="sticky top-0 border-b border-stone-400 text-stone-700 bg-stone-300">
           <button type="button" className="p-3 hover:bg-slate-700 hover:text-white" onClick={props.onClose}><i className="bi-caret-left"></i> Close</button>
         </div>

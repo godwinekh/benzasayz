@@ -7,7 +7,7 @@ import { ref, onValue } from "firebase/database";
 
 const MovieProvider = (props) => {
   const [movies, setMovies] = useState();
-  const [isLoaded, setIsLoaded] = useState();
+  const [isLoaded, setIsLoaded] = useState(false);
   const renderMovies = [];
 
 
@@ -17,13 +17,10 @@ const MovieProvider = (props) => {
     onValue(extractedMovies, (snapshot) => {
       const data = snapshot.val();
       setMovies(data);
+      if (data) {
+        setIsLoaded(true);
+      }
     });
-    
-    if (movies) {
-      setIsLoaded(true)
-    } else {
-      setIsLoaded(false);
-    };
   }, []);
 
   // Reformat movies from database for use
