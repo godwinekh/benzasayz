@@ -9,6 +9,7 @@ import Queried from "./pages/Queried";
 import Uploads from "./pages/Uploads";
 import AuthProvider from "./store/AuthProvider";
 import UploadAuth from "./components/Uploads/UploadAuth";
+import PageNotFound from "./pages/PageNotFound";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/reviews/search/:movieTitle" element={<Queried />} />
           <Route path="/console/uploads" element={<AuthProvider><Uploads /></AuthProvider>} />
           <Route path="/console/admin/authenticate-user" element={<AuthProvider><UploadAuth /></AuthProvider>} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>
     </MovieProvider>
