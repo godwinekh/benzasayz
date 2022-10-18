@@ -8,7 +8,8 @@ import Input, { Textarea } from "../UI/Input";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import Notification from "../UI/Notification";
 
-const newMovieSchema = yup.object({
+const newMovieSchema = yup
+  .object({
     title: yup.string().required(),
     synopsis: yup.string().required(),
     "release-date": yup.date("You need to enter a valid date").required(),
@@ -22,51 +23,55 @@ const newMovieSchema = yup.object({
     "image-lsc": yup
       .mixed()
       .test({
-        message: 'You must provide a landscape image to continue',
+        message: "You must provide a landscape image to continue",
         test: (value) => {
           if (!value.length) return false;
           return true;
-        }
+        },
       })
       .test({
-        message: 'Please provide a supported file type',
+        message: "Please provide a supported file type",
         test: (value) => {
-          const isValid = ['image/png', 'image/jpg', 'image/jpeg'].includes((value[0].type));
+          const isValid = ["image/png", "image/jpg", "image/jpeg"].includes(
+            value[0].type
+          );
           return isValid;
-        }
+        },
       })
       .test({
         message: "File is too large. Max size is 1MB",
         test: (value) => {
           return value[0].size < 1000000;
-        }
+        },
       }),
     "image-prt": yup
       .mixed()
       .test({
-        message: 'You must provide a landscape image to continue',
+        message: "You must provide a landscape image to continue",
         test: (value) => {
           if (!value.length) return false;
           return true;
-        }
+        },
       })
       .test({
-        message: 'Please provide a supported file type',
+        message: "Please provide a supported file type",
         test: (value) => {
-          const isValid = ['image/png', 'image/jpg', 'image/jpeg'].includes((value[0].type));
+          const isValid = ["image/png", "image/jpg", "image/jpeg"].includes(
+            value[0].type
+          );
           return isValid;
-        }
+        },
       })
       .test({
         message: "File is too large. Max size is 1MB",
         test: (value) => {
           return value[0].size < 1000000;
-        }
+        },
       }),
   })
   .required();
 
-  const updateMovieSchema = yup
+const updateMovieSchema = yup
   .object({
     title: yup.string().required(),
     synopsis: yup.string().required(),
@@ -83,11 +88,20 @@ const newMovieSchema = yup.object({
 
 // component function
 const MovieDataForm = (props) => {
-  const { activeMovie, isEditing, status, addMovie, updateMovie, getActiveMovie } =
-    useContext(ActionsContext);
+  const {
+    activeMovie,
+    isEditing,
+    status,
+    addMovie,
+    updateMovie,
+    getActiveMovie,
+  } = useContext(ActionsContext);
   const [steps, setSteps] = useState(false);
-  const copiedValues = {...activeMovie};
-  if (copiedValues) { delete copiedValues.imageUrl };
+  const [counter, setCounter] = useState(0);
+  const copiedValues = { ...activeMovie };
+  if (copiedValues) {
+    delete copiedValues.imageUrl;
+  }
   const existingValues = isEditing ? { ...copiedValues } : "";
   const schema = isEditing ? updateMovieSchema : newMovieSchema;
 
@@ -106,39 +120,107 @@ const MovieDataForm = (props) => {
     if (!status.pending && status.message) {
       reset();
       setSteps((prev) => !prev);
+    } else {
+      return;
     }
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => {
+        if (prevCounter === 60) {
+          return 0
+        } else {
+          return prevCounter + 1;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [status, reset]);
 
   const visible = status.message !== "" ? true : false;
 
   const step1 = (
     <Fragment>
-      <Input label="title" type="text" register={register} error={errors.title} />
-      <Input label="synopsis" type="text" register={register} error={errors.synopsis} />
-      
+      <Input
+        label="title"
+        type="text"
+        register={register}
+        error={errors.title}
+      />
+      <Input
+        label="synopsis"
+        type="text"
+        register={register}
+        error={errors.synopsis}
+      />
+
       <div className="flex gap-5">
-        <Input label="release-date" type="date" register={register} error={errors["release-date"]} />
-        <Input label="rating" type="text" register={register} error={errors.rating} />
+        <Input
+          label="release-date"
+          type="date"
+          register={register}
+          error={errors["release-date"]}
+        />
+        <Input
+          label="rating"
+          type="text"
+          register={register}
+          error={errors.rating}
+        />
       </div>
-      
+
       <Input label="cast" type="text" register={register} error={errors.cast} />
-      <Input label="genre" type="text" register={register} error={errors.genre} />
-      <Textarea label="review" type="text" register={register} error={errors.review} />
+      <Input
+        label="genre"
+        type="text"
+        register={register}
+        error={errors.genre}
+      />
+      <Textarea
+        label="review"
+        type="text"
+        register={register}
+        error={errors.review}
+      />
     </Fragment>
   );
 
   const step2 = (
     <Fragment>
-      {!isEditing && 
+      {!isEditing && (
         <Fragment>
-          <Input label="image-lsc" type="file" register={register} error={errors["image-lsc"]} />
-          <Input label="image-prt" type="file" register={register} error={errors["image-prt"]} />
-        </Fragment> 
-      }
-      <Input label="trailer" type="text" register={register} error={errors.trailer} />
-      <Input label="download" type="text" register={register} error={errors.download} />
+          <Input
+            label="image-lsc"
+            type="file"
+            register={register}
+            error={errors["image-lsc"]}
+          />
+          <Input
+            label="image-prt"
+            type="file"
+            register={register}
+            error={errors["image-prt"]}
+          />
+        </Fragment>
+      )}
+      <Input
+        label="trailer"
+        type="text"
+        register={register}
+        error={errors.trailer}
+      />
+      <Input
+        label="download"
+        type="text"
+        register={register}
+        error={errors.download}
+      />
       <Input label="tags" type="text" register={register} error={errors.tags} />
-      <p className="text-sm text-gray-700"><i>You can choose two categories, separated by commas: Upcoming, General, Playlist, Freshers</i></p>
+      <p className="text-sm text-gray-700">
+        <i>
+          You can choose two categories, separated by commas: Upcoming, General,
+          Playlist, Freshers
+        </i>
+      </p>
     </Fragment>
   );
 
@@ -152,7 +234,6 @@ const MovieDataForm = (props) => {
     getActiveMovie(activeMovie);
   };
 
-  
 
   return (
     <Fragment>
@@ -179,16 +260,22 @@ const MovieDataForm = (props) => {
               {steps ? "Back" : "Next"}
             </button>
             {steps && (
-              <button className="bg-green-600 text-white px-7 py-2 rounded-sm disabled:p-0 disabled:bg-transparent" disabled={status.pending}>
-                { status.pending ? <LoadingSpinner /> : '' }
-                { !status.pending && buttonText }
+              <button
+                className="bg-green-600 text-white px-7 py-2 rounded-sm disabled:p-0 disabled:bg-transparent"
+                disabled={status.pending}
+              >
+                {status.pending ? <LoadingSpinner /> : ""}
+                {!status.pending && buttonText}
               </button>
             )}
           </div>
+          {!status.pending && counter < 61 && (
+            <p className="border-2 rounded-full ml-2 py-2 px-4">{counter}</p>
+          )}
         </div>
       </form>
 
-     {visible && <Notification />}
+      {visible && <Notification />}
     </Fragment>
   );
 };
