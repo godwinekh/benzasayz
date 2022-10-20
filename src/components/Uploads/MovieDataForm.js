@@ -223,7 +223,6 @@ const MovieDataForm = (props) => {
     props.onUpdate(movie);
   }
 
-
   return (
     <Fragment>
       <form onSubmit={handleSubmit(isEditing ? updateMovieHandler : addMovieHandler)}>
