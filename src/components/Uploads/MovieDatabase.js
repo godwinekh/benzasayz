@@ -1,15 +1,17 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import ActionsContext from "../../store/actions-context";
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { consoleActions } from "../../store/console/actions-slice";
 
 const MovieDatabase = () => {
   const [renderedMovies, setRenderedMovies] = useState([]);
-  const {movies, getActiveMovie} = useContext(ActionsContext);
+  const dispatch = useDispatch();
+  const movies = useSelector(state => state.console.movies);
 
   const movieDetailsHandler = useCallback((event) => {
     const movieId = event.target.id;
     const selected = movies.find((movie) => movie.id === movieId);
-    getActiveMovie(selected);
-  }, [movies, getActiveMovie]);
+    dispatch(consoleActions.activeMovieItem(selected));
+  }, [movies, dispatch]);
 
   useEffect(() => {
     const formatMovieItems = movies.map((movieItem) => (

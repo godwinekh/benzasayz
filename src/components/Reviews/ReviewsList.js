@@ -7,7 +7,7 @@ import SubPanel from "./SubPanel";
 
 const ReviewsList = () => {
   const [counter, setCounter] = useState(0);
-  const [quantityIndex, setQuantityIndex] = useState(10);
+  const [quantityIndex, setQuantityIndex] = useState(18);
   const [previews, setPreviews] = useState(0);
   const [first, setFirst] = useState(true);
   const [last, setLast] = useState(false);
@@ -20,7 +20,7 @@ const ReviewsList = () => {
         .slice(counter, quantityIndex)
         .map((movie) => (
           <MoviePreview
-            className="text-gray-100 bg-image-full"
+            className="text-gray-20 bg-image-full"
             key={movie.id}
             id={movie.id}
             title={movie.title}
@@ -46,13 +46,13 @@ const ReviewsList = () => {
   }, [counter, quantityIndex, movies]);
 
   const prevHandler = () => {
-    setCounter(counter - 10);
-    setQuantityIndex(quantityIndex - 10);
+    setCounter(counter - 18);
+    setQuantityIndex(quantityIndex - 18);
   };
 
   const nextHandler = () => {
-    setCounter(counter + 10);
-    setQuantityIndex(quantityIndex + 10);
+    setCounter(counter + 18);
+    setQuantityIndex(quantityIndex + 18);
   };
 
   return (
@@ -60,7 +60,7 @@ const ReviewsList = () => {
       <SubPanel total={movies.length} upper={quantityIndex} lower={counter} />
 
       <section className="mt-48 bg-slate-900 py-12 px-5 lg:mt-28">
-        <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-6">
+        <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-6 text-white">
           {previews}
         </div>
 

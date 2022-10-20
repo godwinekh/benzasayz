@@ -23,7 +23,7 @@ const NewReviews = (props) => {
   ));
 
   return (
-    <section className="pt-8 bg-gray-700 -mt-1 relative">
+    <section className="pt-8 bg-slate-900 -mt-1 relative">
       <SectionHeader className="mb-8 text-3xl">Recently Added Reviews</SectionHeader>
       <div className="md:grid gap-7 md:grid-cols-2 lg:grid-cols-5 md:mb-10 md:px-5">
         {contents.reverse()}
@@ -35,8 +35,8 @@ const NewReviews = (props) => {
           </div>
         )}
 
-      <div className="bg-slate-900 py-14 text-center">
-        <Link to="/reviews" className="py-4 px-10 text-stone-200 bg-gray-700 rounded-lg">
+      <div className="bg-slate-800 py-14 text-center">
+        <Link to="/reviews" className="py-4 px-10 text-stone-200 bg-slate-900 rounded-lg hover:bg-gray-900 hover:text-yellow-400">
           More Reviews <i className="bi-arrow-right ml-5"></i>
         </Link>
       </div>

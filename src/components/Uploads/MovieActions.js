@@ -1,15 +1,23 @@
-import { useContext } from "react";
-import ActionsContext from "../../store/actions-context";
+import { useDispatch } from "react-redux";
+import { consoleActions } from "../../store/console/actions-slice";
 
 const MovieActions = () => {
-  const {showForm, removeMovie} = useContext(ActionsContext);
+  const dispatch = useDispatch();
 
   const addHandler = () => {
-    showForm("add")
+    dispatch(consoleActions.showForm());
   };
   const editHandler = () => {
-    showForm("edit")
+    dispatch(consoleActions.showForm("edit"));
   };
+  const removeMovieHandler = () => {
+    const validate = window.confirm("This action is permanent. Do you want to continue?");
+    if (validate) {
+      dispatch(consoleActions.removeMovieItem())
+    } else {
+      console.log("deletion canceled")
+    }
+  }
 
   return (
     <div className="flex justify-center gap-2 pt-10">
@@ -28,7 +36,7 @@ const MovieActions = () => {
       </button>
 
       <button
-        onClick={removeMovie}
+        onClick={removeMovieHandler}
         className="bg-slate-900 text-white px-7 py-2 hover:bg-red-600"
       >
         Delete

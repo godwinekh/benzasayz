@@ -1,12 +1,11 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import ActionsContext from "../../store/actions-context";
 import Card from "../UI/Card";
 import Input, { Textarea } from "../UI/Input";
 import LoadingSpinner from "../UI/LoadingSpinner";
-import Notification from "../UI/Notification";
+import { useSelector } from "react-redux";
 
 const newMovieSchema = yup
   .object({
@@ -75,7 +74,6 @@ const updateMovieSchema = yup
   .object({
     title: yup.string().required(),
     synopsis: yup.string().required(),
-    "release-date": yup.date("You need to enter a valid date").required(),
     rating: yup.number().positive(),
     cast: yup.string().required(),
     genre: yup.string().required(),
@@ -88,16 +86,10 @@ const updateMovieSchema = yup
 
 // component function
 const MovieDataForm = (props) => {
-  const {
-    activeMovie,
-    isEditing,
-    status,
-    addMovie,
-    updateMovie,
-    getActiveMovie,
-  } = useContext(ActionsContext);
+  const activeMovie = useSelector(state => state.console.activeMovie);
+  const isEditing = useSelector(state => state.console.isEditing);
+  const status = useSelector(state => state.console.status);
   const [steps, setSteps] = useState(false);
-  const [counter, setCounter] = useState(0);
   const copiedValues = { ...activeMovie };
   if (copiedValues) {
     delete copiedValues.imageUrl;
@@ -123,20 +115,7 @@ const MovieDataForm = (props) => {
     } else {
       return;
     }
-    const interval = setInterval(() => {
-      setCounter((prevCounter) => {
-        if (prevCounter === 60) {
-          return 0
-        } else {
-          return prevCounter + 1;
-        }
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
   }, [status, reset]);
-
-  const visible = status.message !== "" ? true : false;
 
   const step1 = (
     <Fragment>
@@ -159,6 +138,7 @@ const MovieDataForm = (props) => {
           type="date"
           register={register}
           error={errors["release-date"]}
+          disabled={isEditing}
         />
         <Input
           label="rating"
@@ -230,14 +210,23 @@ const MovieDataForm = (props) => {
     e.preventDefault();
     setSteps((prev) => !prev);
   };
-  const onCancelHandler = () => {
-    getActiveMovie(activeMovie);
+
+  const stopEditingHandler = () => {
+    props.onCancel();
   };
+
+  const addMovieHandler = (movie) => {
+    props.transformer(movie);
+  }
+
+  const updateMovieHandler = (movie) => {
+    props.onUpdate(movie);
+  }
 
 
   return (
     <Fragment>
-      <form onSubmit={handleSubmit(isEditing ? updateMovie : addMovie)}>
+      <form onSubmit={handleSubmit(isEditing ? updateMovieHandler : addMovieHandler)}>
         <Card>
           {!steps && step1}
           {steps && step2}
@@ -246,7 +235,7 @@ const MovieDataForm = (props) => {
         <div className="flex justify-center items-center pt-5">
           {isEditing && (
             <button
-              onClick={onCancelHandler}
+              onClick={stopEditingHandler}
               className="bg-stone-400 text-gray-700 px-7 py-2 rounded-sm"
             >
               Cancel
@@ -269,13 +258,8 @@ const MovieDataForm = (props) => {
               </button>
             )}
           </div>
-          {!status.pending && counter < 61 && (
-            <p className="border-2 rounded-full ml-2 py-2 px-4">{counter}</p>
-          )}
         </div>
       </form>
-
-      {visible && <Notification />}
     </Fragment>
   );
 };

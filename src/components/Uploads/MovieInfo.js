@@ -1,14 +1,15 @@
-import { Fragment, useContext, useState } from "react";
-import ActionsContext from "../../store/actions-context";
+import { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
 import Card from "../UI/Card";
 import { ConsoleModal } from "../UI/Modal";
-import Notification from "../UI/Notification";
+import ImageChanger from "./ImageChanger";
 import MovieActions from "./MovieActions";
 
 const MovieInfo = () => {
-  const { activeMovie, status } = useContext(ActionsContext);
+  const activeMovie = useSelector(state => state.console.activeMovie);
   const [viewSynopsis, setViewSynopsis] = useState(false);
   const [viewReview, setViewReview] = useState(false);
+  const [editImages, setEditImages] = useState(false);
 
   const toggleSynopsisHandler = () => {
     setViewSynopsis(prevState => !prevState);
@@ -17,8 +18,10 @@ const MovieInfo = () => {
   const toggleReviewHandler = () => {
     setViewReview(prevState => !prevState);
   };
-
-  const visible = status.message !== "" ? true : false;
+  
+  const toggleEditImagesHandler = () => {
+    setEditImages(prevState => !prevState);
+  };
 
   return (
     <Fragment>
@@ -30,11 +33,13 @@ const MovieInfo = () => {
           </h2>
           <p>Rating: {activeMovie.rating}</p>
         </div>
-        <div className="px-1 py-2 flex gap-10">
+        <div className="py-2 flex gap-8">
           <button className="font-bold" onClick={toggleSynopsisHandler}><i className="bi-card-text pr-1"></i> View synopsis</button>
-          {viewSynopsis && <ConsoleModal onClose={toggleSynopsisHandler}><p>{activeMovie.synopsis}</p></ConsoleModal>}
+          {viewSynopsis && <ConsoleModal onClose={toggleSynopsisHandler} heading="Movie Synopsis"><article>{activeMovie.synopsis}</article></ConsoleModal>}
           <button className="font-bold" onClick={toggleReviewHandler}><i className="bi-card-text pr-1"></i> View review</button>
-          {viewReview && <ConsoleModal onClose={toggleReviewHandler}><p>{activeMovie.review}</p></ConsoleModal>}
+          {viewReview && <ConsoleModal onClose={toggleReviewHandler} heading="Movie Review"><article>{activeMovie.review}</article></ConsoleModal>} 
+          <button className="font-bold" onClick={toggleEditImagesHandler}><i className="bi-image pr-1"></i> Open Image Changer</button>
+          {editImages && <ImageChanger onClose={toggleEditImagesHandler} />}
         </div>
       </div>
 
@@ -78,9 +83,7 @@ const MovieInfo = () => {
         </div>
       </div>
     </Card>
-    <MovieActions /> 
-
-    {visible && <Notification />}   
+    <MovieActions />  
     </Fragment>
   );
 };

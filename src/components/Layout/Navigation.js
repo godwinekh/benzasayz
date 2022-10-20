@@ -6,12 +6,6 @@ import SearchForm from "./SearchForm";
 import SectionHeader from "./SectionHeader";
 
 const Navigation = (props) => {
-  // const location = useLocation();
-
-  // extract location and limit the display of some elements on the upload console.
-  // const url = location.pathname;
-  // const isUpload = url === "/uploads";
-
   return (
     <Modal onDismiss={props.onDismiss}>
       <div className="bg-stone-300 p-5 h-1/2">
@@ -143,7 +137,7 @@ export const InlineNavigation = () => {
       {/* Displays for only the upload url */}
       {isUploadLogout && (
         <li className="md:pl-10 lg:px-0 text-2xl">
-          <button onClick={logout}>
+          <button onClick={logout} className="hover:text-yellow-500">
             <i className="bi-box-arrow-right"></i>
           </button>
         </li>

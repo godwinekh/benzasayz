@@ -1,12 +1,16 @@
-import { useContext } from "react";
-import ActionsContext from "../../store/actions-context";
+import { useDispatch } from "react-redux";
+import { consoleActions } from "../../store/console/actions-slice";
 
 const MovieFinder = () => {
-  const { findMovie } = useContext(ActionsContext);
+  const dispatch = useDispatch();
 
-  const searchDbHandler = (event) => {
+  const searchMoviesHandler = (event) => {
     const keywords = event.target.value;
-    findMovie(keywords);
+    dispatch(consoleActions.findMovieItem(keywords));
+  };
+
+  const reloadMoviesHandler = () => {
+    dispatch(consoleActions.loadMovies());
   };
 
   return (
@@ -16,11 +20,11 @@ const MovieFinder = () => {
           className="px-2 bg-stone-100 w-3/4 rounded-md outline-1 outline  outline-stone-300 hover:outline-none focus:outline-none active:outline-none"
           type="text"
           placeholder="Search database"
-          onChange={searchDbHandler}
+          onChange={searchMoviesHandler}
         />
-        <span className="inline-block px-3 font-bold text-xl text-stone-400">
-          <i className="bi-search"></i>
-        </span>
+        <button type="button" onClick={reloadMoviesHandler} className="inline-block px-3 rounded-full font-bold text-xl text-stone-400 hover:text-black">
+          <i className="bi-arrow-clockwise"></i>
+        </button>
       </form>
     </div>
   );

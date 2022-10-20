@@ -24,6 +24,10 @@ const ConsoleModalOverlay = (props) => {
     <div className="flex justify-center">
       <div className="fixed top-28 w-2/3 z-40">
         <Card>
+          <header className="pb-8 flex justify-center">
+            <h1 className="text-2xl text-gray-800">{props.heading}</h1>
+          </header>
+
           <div className="max-h-96 overflow-y-auto overscroll-auto text-justify pr-2">{props.children}</div>
           <div className="flex justify-center">
           <button className="bg-slate-800 text-stone-200 px-5 py-2 mt-10" onClick={props.onClose}>Close</button>
@@ -40,7 +44,7 @@ export const ConsoleModal = (props) => {
   return (
     <div>
       {ReactDOM.createPortal(<Backdrop dismiss={props.onClose} />, portalElement)}
-      {ReactDOM.createPortal(<ConsoleModalOverlay onClose={props.onClose}>{props.children}</ConsoleModalOverlay>, portalElement)}       
+      {ReactDOM.createPortal(<ConsoleModalOverlay onClose={props.onClose} heading={props.heading}>{props.children}</ConsoleModalOverlay>, portalElement)}       
     </div>
   );
 };

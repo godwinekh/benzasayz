@@ -10,21 +10,35 @@ import Uploads from "./pages/Uploads";
 import AuthProvider from "./store/AuthProvider";
 import UploadAuth from "./components/Uploads/UploadAuth";
 import PageNotFound from "./pages/PageNotFound";
+import { Provider } from "react-redux";
+import store from "./store/console";
 
 const App = () => {
   return (
     <MovieProvider>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" replace />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/reviews" element={<Reviews />} /> 
-          <Route path="/reviews/search/:movieTitle" element={<Queried />} />
-          <Route path="/console/uploads" element={<AuthProvider><Uploads /></AuthProvider>} />
-          <Route path="/console/admin/authenticate-user" element={<AuthProvider><UploadAuth /></AuthProvider>} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </Layout>
+      <AuthProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/reviews/search/:movieTitle" element={<Queried />} />
+            <Route
+              path="/console/uploads"
+              element={
+                <Provider store={store}>
+                  <Uploads />
+                </Provider>
+              }
+            />
+            <Route
+              path="/console/admin/authenticate-user"
+              element={<UploadAuth />}
+            />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Layout>
+      </AuthProvider>
     </MovieProvider>
   );
 };

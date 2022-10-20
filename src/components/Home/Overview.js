@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { Fragment } from "react";
 import MovieContext from "../../store/movie-context";
-import MoviePreview from "../Movies/MoviePreview";
+import MovieItem from "../Movies/MovieItem";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
 const Overview = (props) => {
   const movieCtx = useContext(MovieContext);
   const { movies, isLoaded } = movieCtx;
 
-  const filteredMovies = movies.filter(movie => movie.rating > 6);
+  const filteredMovies = movies.filter(movie => movie.rating > 7.5);
 
   const min = 1;
   const max = filteredMovies.length;
@@ -17,7 +17,7 @@ const Overview = (props) => {
   console.log(randomNum);
 
   const contents = filteredMovies.map((movie) => (
-    <MoviePreview
+    <MovieItem
       key={movie.id}
       id={movie.id}
       className={`basis-1/4 shadow-xl shadow-slate-900 hover:scale-105 bg-image-full`}
@@ -35,7 +35,7 @@ const Overview = (props) => {
   const favorites = contents.slice(0, 3);
 
   const getCenterIndex = filteredMovies.map((movie) => (
-    <MoviePreview
+    <MovieItem
       key={movie.id}
       id={movie.id}
       className={`basis-2/4 shadow-xl shadow-slate-900 hover:scale-105 z-10 bg-image-full`}
