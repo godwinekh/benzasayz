@@ -14,7 +14,6 @@ const Uploads = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
     if (!uid) {
       navigate("/console/admin/authenticate-user");
     }

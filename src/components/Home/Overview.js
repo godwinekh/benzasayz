@@ -4,19 +4,22 @@ import MovieContext from "../../store/movie-context";
 import MovieItem from "../Movies/MovieItem";
 import LoadingSpinner from "../UI/LoadingSpinner";
 
-const Overview = (props) => {
+const shuffle = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  };
+  return array;
+}
+
+const Overview = () => {
   const movieCtx = useContext(MovieContext);
   const { movies, isLoaded } = movieCtx;
 
-  const filteredMovies = movies.filter(movie => movie.rating > 7.5);
+  const filteredMovies = movies.filter(movie => movie.rating > 7.0);  
+  const topMovies = shuffle(filteredMovies);
 
-  const min = 1;
-  const max = filteredMovies.length;
-  const range = max - min;
-  const randomNum = (Math.random() * range) + min;
-  console.log(randomNum);
-
-  const contents = filteredMovies.map((movie) => (
+  const contents = topMovies.map((movie) => (
     <MovieItem
       key={movie.id}
       id={movie.id}
@@ -34,7 +37,7 @@ const Overview = (props) => {
 
   const favorites = contents.slice(0, 3);
 
-  const getCenterIndex = filteredMovies.map((movie) => (
+  const getCenterIndex = topMovies.map((movie) => (
     <MovieItem
       key={movie.id}
       id={movie.id}

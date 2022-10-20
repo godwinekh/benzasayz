@@ -1,23 +1,29 @@
-import React from "react";
-import Home from "./pages/Home";
-import Reviews from "./pages/Reviews";
-import MovieProvider from "./store/MovieProvider";
-import Layout from "./components/Layout/Layout";
+import React, { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./App.css";
-import Queried from "./pages/Queried";
-import Uploads from "./pages/Uploads";
+import MovieProvider from "./store/MovieProvider";
 import AuthProvider from "./store/AuthProvider";
-import UploadAuth from "./components/Uploads/UploadAuth";
-import PageNotFound from "./pages/PageNotFound";
 import { Provider } from "react-redux";
+import Layout from "./components/Layout/Layout";
+import Home from "./pages/Home";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
 import store from "./store/console";
+import "./App.css";
+
+const Reviews = React.lazy(() => import("./pages/Reviews"));
+const Queried = React.lazy(() => import("./pages/Queried"));
+const Uploads = React.lazy(() => import("./pages/Uploads"));
+const UploadAuth = React.lazy(() => import("./components/Uploads/UploadAuth"));
+const PageNotFound = React.lazy(() => import("./pages/PageNotFound"));
 
 const App = () => {
   return (
     <MovieProvider>
-      <AuthProvider>
-        <Layout>
+      <Layout>
+        <Suspense fallback={
+          <div className="centered">
+            <LoadingSpinner />
+          </div>
+        }>
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
@@ -26,19 +32,21 @@ const App = () => {
             <Route
               path="/console/uploads"
               element={
-                <Provider store={store}>
-                  <Uploads />
-                </Provider>
+                <AuthProvider>
+                  <Provider store={store}>
+                    <Uploads />
+                  </Provider>
+                </AuthProvider>
               }
             />
             <Route
               path="/console/admin/authenticate-user"
-              element={<UploadAuth />}
+              element={<AuthProvider><UploadAuth /></AuthProvider>}
             />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-        </Layout>
-      </AuthProvider>
+        </Suspense>
+      </Layout>
     </MovieProvider>
   );
 };

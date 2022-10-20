@@ -6,21 +6,24 @@ import { useNavigate } from "react-router-dom";
 
 const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
   const navigate = useNavigate();
-  const uid = localStorage.getItem("uid");
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-    });
+    });    
+  }, []);
 
-    if (!uid) {
+  useEffect(() => {
+    if (isLoggedOut) {
       navigate("/console/admin/authenticate-user");
     }
-  }, [uid, navigate]);
+  }, [isLoggedOut, navigate]);
 
   const logoutHandler = async () => {
     await signOut(auth);
+    setIsLoggedOut(true);
     localStorage.clear();
   };
 

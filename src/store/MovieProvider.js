@@ -23,7 +23,7 @@ const MovieProvider = (props) => {
     });
   }, []);
 
-  // Reformat movies from database for use
+  // Reformat movies from database for use 
   for (const key in movies) {
     renderMovies.push({
       ...movies[key],
@@ -33,7 +33,7 @@ const MovieProvider = (props) => {
 
 
   return (
-    <MovieContext.Provider value={{movies: renderMovies, isLoaded}}>
+    <MovieContext.Provider value={{movies: renderMovies.reverse(), isLoaded}}>
       {props.children}
     </MovieContext.Provider>
   );

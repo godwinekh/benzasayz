@@ -24,7 +24,7 @@ const MoviePreview = (props) => {
 
   return (
     <Fragment>
-      <div className={`${props.className} relative hover:scale-105`} style={props.style} onClick={showReviewHandler}>
+      <div className={`${props.className} relative hover:scale-105 mt-7 md:my-0`} style={props.style} onClick={showReviewHandler}>
         <h2 className="font-bold text-lg text-slate-400 text-center py-2 hover:text-yellow-500 hover:cursor-pointer bg-slate-900 opacity-90" onClick={showReviewHandler}>
           {props.title.toUpperCase()}
         </h2>
