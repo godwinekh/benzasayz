@@ -10,7 +10,7 @@ const useFind = () => {
   const exactMatch = useCallback(
     (title) => {
       const exactMovieMatch = movies.find(
-        (movie) => movie.title.toLowerCase() === title
+        (movie) => movie.title.toLowerCase() === title.trim()
       );
 
       if (exactMovieMatch) {
@@ -45,8 +45,6 @@ const useFind = () => {
 
         if (findClosest.length > 0) {
           filteredMatches = findClosest;
-          console.log("we are running the block");
-          console.log(findClosest);
         } else {
           const possibleMatches = [];
           const keywords = title.toLowerCase().split(" ");

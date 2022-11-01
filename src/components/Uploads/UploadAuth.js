@@ -29,15 +29,18 @@ const UploadAuth = (props) => {
     try {
       const signInTask = await signInWithEmailAndPassword(auth, email, password);
       
-      if (signInTask.user !== "") {
+      if (signInTask.user.email === "jkson262@gmail.com" || "etinosa2011@gmail.com") {
         localStorage.setItem("uid", signInTask.user.uid);
+        setIsLoading(false);
         navigate("/console/uploads");
       };
 
-      setIsLoading(false);
+      throw new Error("User is unauthorized!");
+
     } catch (error) {
       setError(error.message);
       setIsLoading(false);
+      navigate("/");
     }
     
 

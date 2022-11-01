@@ -4,12 +4,10 @@ import { db } from "./../firebase-config";
 import { ref, onValue } from "firebase/database";
 
 
-
 const MovieProvider = (props) => {
   const [movies, setMovies] = useState();
   const [isLoaded, setIsLoaded] = useState(false);
   const renderMovies = [];
-
 
   // Retrieve all movie reference from firebase database
   useEffect(() => {    

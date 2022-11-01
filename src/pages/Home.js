@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import SearchForm from "../components/Layout/SearchForm";
 import NewReviews from "../components/Home/NewReviews";
 import Overview from "../components/Home/Overview";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   
@@ -22,6 +23,8 @@ const Home = () => {
         <Overview />
       </section>
       <NewReviews />
+
+      <Outlet />
     </Fragment>
   );
 };

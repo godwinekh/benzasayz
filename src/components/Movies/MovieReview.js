@@ -1,16 +1,30 @@
 import React, { Fragment, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import MovieContext from "../../store/movie-context";
 import Modal from "../UI/Modal";
 
 const MovieReview = (props) => {
+  const navigate = useNavigate();
   const movieCtx = useContext(MovieContext);
+  const params = useParams();
   const { movies } = movieCtx;
-  const { movieId } = props;
+  const { movieId } = params;
+  let renderParagraphs;
+
+  const closeReviewHandler = () => {
+    navigate(-1);
+  }
 
   const movieItem = movies.find((movie) => movie.id === movieId);
 
+  if (movieItem) {
+    const { review } = movieItem;
+    const paragraphs = review.split("%");
+    renderParagraphs = paragraphs.map(paragraph => <p className="indent-10 text-justify" key={paragraphs.indexOf(paragraph)}>{paragraph}</p>)
+  }
+
   return (
-    <Modal onDismiss={props.onDismiss}>
+    <Modal onDismiss={closeReviewHandler}>
       <div className="bg-gray-900 text-gray-100">
         <img className="" src={movieItem.imageUrl.imageLsc} alt={""} />
 
@@ -64,8 +78,7 @@ const MovieReview = (props) => {
               ) : (
                 <p>
                   No download link is available yet for this movie. You can wait
-                  a little longer if the movie is not released yet or is a
-                  cinema-release movie. Otherwise you can request a download by
+                  a little longer if the movie is not released yet or its still in cinemas. Otherwise you can request a download by
                   clicking <a href="https://chat.whatsapp.com/G0EK5XFPNbf6eC48sjezkA" className="text-blue-700">here</a>
                 </p>
               )}
@@ -75,7 +88,7 @@ const MovieReview = (props) => {
 
         <div className="px-8 py-10 bg-slate-700 text-gray-100">
           <h3 className="pb-3 font-bold text-lg">Benza says:</h3>
-          <p>{movieItem.review}</p>
+          <article>{renderParagraphs}</article>
         </div>
       </div>
     </Modal>

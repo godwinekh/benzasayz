@@ -1,16 +1,14 @@
-import React, { Fragment, useState } from "react";
-import MovieReview from "./MovieReview";
+import React, { Fragment } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MoviePreview = (props) => {
-  const [movieModal, setMovieModal] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const showReviewHandler = (event) => {
-    setMovieModal(true);
+  const showReviewHandler = () => {
+    navigate(`${location.pathname}/movies/${props.id}`)
   };
 
-  const closeReviewHandler = () => {
-    setMovieModal(false);
-  };
 
   let ratingColor;
 
@@ -42,7 +40,7 @@ const MoviePreview = (props) => {
         </div>
       </div>
 
-      {movieModal && <MovieReview onDismiss={closeReviewHandler} movieId={props.id} />}
+      {/* {movieModal && <MovieReview onDismiss={closeReviewHandler} movieId={props.id} />} */}
     </Fragment>
   );
 };

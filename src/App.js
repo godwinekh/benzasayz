@@ -10,6 +10,7 @@ import store from "./store/console";
 import "./App.css";
 
 const Reviews = React.lazy(() => import("./pages/Reviews"));
+const MovieReview = React.lazy(() => import("./components/Movies/MovieReview"));
 const Queried = React.lazy(() => import("./pages/Queried"));
 const Uploads = React.lazy(() => import("./pages/Uploads"));
 const UploadAuth = React.lazy(() => import("./components/Uploads/UploadAuth"));
@@ -26,8 +27,12 @@ const App = () => {
         }>
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/reviews" element={<Reviews />} />
+            <Route path="/home" element={<Home />}>
+              <Route path="/home/movies/:movieId" element={<MovieReview />} />
+            </Route>
+            <Route path="/reviews" element={<Reviews />}>
+              <Route path="/reviews/movies/:movieId" element={<MovieReview />} />
+            </Route>
             <Route path="/reviews/search/:movieTitle" element={<Queried />} />
             <Route
               path="/console/uploads"
